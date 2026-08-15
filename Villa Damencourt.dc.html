@@ -3,6 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Ces balises vivent dans le <head> RÉEL, et non dans le <helmet> du
+     runtime : les robots d'indexation et les aperçus de partage lisent le
+     document servi, ils n'exécutent pas le script. Placées dans le helmet,
+     elles n'existeraient que pour un navigateur.
+     Elles sont en français, la langue par défaut du site ; la bascule FR/EN
+     est côté client et ne change pas le document servi. -->
+<title>Villa Damencourt — location de villa au Moule, Guadeloupe</title>
+<meta name="description" content="Case créole contemporaine ouverte sur l’Atlantique, à quatre minutes à pied de la plage de l’Autre Bord. Six chambres climatisées, douze hôtes, une seule location à la fois. Le Moule, Grande-Terre.">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Villa Damencourt">
+<meta property="og:title" content="Villa Damencourt — Le Moule, Guadeloupe">
+<meta property="og:description" content="Case créole contemporaine ouverte sur l’Atlantique, à quatre minutes de la plage de l’Autre Bord. Six chambres, douze hôtes.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
+<meta name="twitter:card" content="summary_large_image">
+
 <script src="./support.js"></script>
 </head>
 <body>
