@@ -300,14 +300,28 @@ def transformer(corps, lg, fichier):
         langue, corps, flags=re.S)
 
     # 4. la vidéo : deux fichiers locaux au lieu d'un Full HD distant
-    corps = re.sub(
-        r'<video\b[^>]*>.*?</video>',
-        '<video class="hz-video" autoplay muted loop playsinline preload="metadata" '
-        'aria-hidden="true" poster="/assets/img/hz-exp-2-800.webp" '
-        'style="width:100%;height:100%;object-fit:cover">'
-        '<source src="/assets/video/plage-640.mp4" type="video/mp4" media="(max-width:700px)">'
-        '<source src="/assets/video/plage-960.mp4" type="video/mp4">'
-        '</video>', corps, flags=re.S)
+    # Deux plans distincts, et non un seul : la page d'accueil montre la plage,
+    # « la région » une vue aérienne. Les avoir confondus mettait le mauvais
+    # plan sur la seconde. On les reconnaît à l'identifiant Pexels de la source
+    # d'origine.
+    VIDEOS = {
+      "12021278": ("plage", "/assets/img/hz-exp-1-800.webp"),
+      "31931891": ("aerienne", "/assets/img/hz-exp-2-800.webp"),
+    }
+    def remplacer_video(m):
+        t = m.group(0)
+        ident = re.search(r"video-files/(\d+)/", t)
+        nom, affiche = VIDEOS.get(ident.group(1) if ident else "", VIDEOS["12021278"])
+        # On conserve le style d'origine : c'est lui qui donne la forme du
+        # cadre (plein écran sur l'accueil, bandeau 21/9 sur la région).
+        style = re.search(r'style="([^"]*)"', t)
+        return ('<video class="hz-video" autoplay muted loop playsinline preload="metadata" '
+                'aria-hidden="true" poster="%s" style="%s">'
+                '<source src="/assets/video/%s-640.mp4" type="video/mp4" media="(max-width:700px)">'
+                '<source src="/assets/video/%s-960.mp4" type="video/mp4">'
+                '</video>' % (affiche, style.group(1) if style else
+                              "width:100%;height:100%;object-fit:cover", nom, nom))
+    corps = re.sub(r'<video\b[^>]*>.*?</video>', remplacer_video, corps, flags=re.S)
 
     # 5. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
     corps = corps.replace("https://images.unsplash.com/", "/assets/img/")
@@ -348,7 +362,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "7"
+VERSION = "8"
 
 
 def main():
