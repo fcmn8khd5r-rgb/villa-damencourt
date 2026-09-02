@@ -371,6 +371,20 @@
       ["loadedmetadata", "loadeddata", "canplay"].forEach(function (e) {
         v.addEventListener(e, tenter);
       });
+
+      /* Quelques essais espacés, le temps que le navigateur veuille bien.
+         Les événements de chargement ne se produisent qu'une fois : si le
+         refus tombe sur chacun d'eux, plus rien ne retente avant que la
+         personne ne touche l'écran. Or l'autorisation n'est pas figée — elle
+         peut être accordée quand l'onglet passe au premier plan ou quand le
+         mode économie d'énergie est levé. Six secondes d'essais toutes les
+         demi-secondes ne coûtent rien : un play() refusé rend une promesse
+         rejetée, que l'on ignore. */
+      var essais = 0;
+      var relance = setInterval(function () {
+        if (!v.paused || ++essais > 12) { clearInterval(relance); return; }
+        tenter();
+      }, 500);
       document.addEventListener("visibilitychange", function () {
         if (!document.hidden) tenter();
       });
