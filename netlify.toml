@@ -1,0 +1,46 @@
+# Villa Damencourt — configuration de déploiement
+#
+# Ce fichier existe pour une raison précise : sur Netlify, netlify.toml PREND
+# LE PAS sur les réglages saisis dans l'interface. Or ce site a d'abord été
+# déployé du temps où il tenait dans un fichier unique, avec une réécriture
+# qui envoyait toutes les adresses vers « Villa Damencourt.dc.html ». Ce
+# fichier a disparu de la racine, et un réglage resté en place dans le tableau
+# de bord masquerait le nouveau site. En le déclarant ici, on neutralise tout
+# ce qui pourrait subsister là-bas.
+
+[build]
+  # Site statique : il n'y a rien à construire. La commande est déclarée
+  # explicitement — sans cela, une commande restée dans l'interface
+  # continuerait de s'exécuter.
+  command = "echo 'site statique : rien a construire'"
+  publish = "."
+
+[build.processing]
+  skip_processing = true
+
+# Les images et les polices portent leur version dans leur nom : elles ne
+# changent jamais sous la même adresse, on peut donc les garder un an.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Les pages, elles, doivent être revérifiées à chaque visite : c'est ce qui
+# fait qu'une correction arrive tout de suite chez le visiteur.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
