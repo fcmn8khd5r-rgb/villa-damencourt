@@ -286,4 +286,67 @@
     });
   }
 
+
+  /* ---- foire aux questions ---------------------------------------------- */
+  /* Les réponses sont dans la page, visibles. Le script les replie et les
+     rouvre au clic — dans cet ordre, jamais l'inverse : si rien ne s'exécute,
+     on lit les six réponses au lieu de six titres muets. */
+  var questions = $$('[data-dc-tpl="327"]');
+  var reponses = $$(".hz-faq-r");
+  if (questions.length && questions.length === reponses.length) {
+    var ouvrir = function (i, oui) {
+      reponses[i].hidden = !oui;
+      questions[i].setAttribute("aria-expanded", oui ? "true" : "false");
+      var signe = questions[i].querySelector("span:last-child");
+      if (signe) signe.style.transform = oui ? "rotate(45deg)" : "rotate(0deg)";
+    };
+    questions.forEach(function (q, i) {
+      var r = reponses[i];
+      var id = "hz-faq-" + i;
+      r.id = id;
+      q.setAttribute("aria-controls", id);
+      ouvrir(i, false);
+      q.addEventListener("click", function () {
+        var etait = !r.hidden;
+        // Une seule ouverte à la fois, comme dans la version d'origine.
+        questions.forEach(function (_, j) { ouvrir(j, false); });
+        ouvrir(i, !etait);
+      });
+    });
+  }
+
+  /* ---- formulaire de demande -------------------------------------------- */
+  /* La villa est fictive : il n'y a rien à envoyer, et la version d'origine
+     n'envoyait rien non plus — elle affichait un accusé de réception. On fait
+     de même, en le disant. Sans script, le formulaire reste affiché et
+     lisible : personne ne croit avoir envoyé quelque chose. */
+  var champs = $$("#bk-name, #bk-email, #bk-msg");
+  var envoi = $$("button").filter(function (b) {
+    return /envoyer la demande|send the enquiry|send request/i.test((b.textContent || "").trim());
+  })[0];
+  if (envoi && champs.length) {
+    var note = document.createElement("p");
+    note.id = "hz-envoi-note";
+    note.setAttribute("role", "status");
+    note.setAttribute("aria-live", "polite");
+    note.style.cssText = "margin:14px 0 0; font-size:14px; color:rgb(179,85,47)";
+    envoi.parentElement.appendChild(note);
+    envoi.addEventListener("click", function (e) {
+      e.preventDefault();
+      var vide = champs.filter(function (c) { return !(c.value || "").trim(); });
+      var en = document.documentElement.lang === "en";
+      if (vide.length) {
+        note.style.color = "rgb(156,58,40)";
+        note.textContent = en ? "Name, email and message are required."
+                              : "Le nom, le courriel et le message sont nécessaires.";
+        vide[0].focus();
+        return;
+      }
+      note.style.color = "rgb(179,85,47)";
+      note.textContent = en
+        ? "Demonstration site — nothing was sent. Villa Damencourt is a fictional property."
+        : "Site de démonstration — rien n'a été envoyé. La Villa Damencourt est une propriété fictive.";
+    });
+  }
+
 })();

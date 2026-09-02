@@ -33,6 +33,8 @@ import json, os, re
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAPTURE = os.path.join(RACINE, "src", "capture")
 MAN = json.load(open(os.path.join(RACINE, "src/manifeste-images.json"), encoding="utf-8"))
+_faq = os.path.join(RACINE, "src/faq.json")
+FAQ = json.load(open(_faq, encoding="utf-8")) if os.path.exists(_faq) else {}
 SRC = json.load(open(os.path.join(RACINE, "src/images-source.json"), encoding="utf-8"))
 
 # Une même photo apparaît sous plusieurs identifiants de slot : la page « la
@@ -44,7 +46,17 @@ PAR_PHOTO = {v["id"]: k for k, v in SRC.items() if isinstance(v, dict) and "id" 
 PAGES = [("index.html", "accueil"), ("la-villa.html", "la-villa"),
          ("chambres.html", "chambres"), ("galerie.html", "galerie"),
          ("sejour.html", "sejour"), ("la-region.html", "la-region"),
-         ("journal.html", "journal")]
+         ("journal.html", "journal"),
+         # Huitième page, absente de la barre de navigation : on n'y arrive que
+         # par les boutons « Réserver » et « Voir les disponibilités ». Elle
+         # porte le formulaire de demande, les coordonnées et la foire aux
+         # questions — et je l'avais d'abord manquée pour cette raison même.
+         # On part de la capture DÉPLIÉE : les réponses de la foire aux
+         # questions n'existent dans le DOM qu'une fois la question ouverte.
+         # Repliées à la construction, elles seraient absentes de la page ;
+         # dépliées, elles y sont toutes, et le script se contente de les
+         # replier — donc sans script, on lit tout.
+         ("reserver.html", "reserver-deplie")]
 
 LIBELLES = {
   "fr": {"Accueil": "index.html", "La villa": "la-villa.html", "Chambres": "chambres.html",
@@ -69,7 +81,9 @@ TITRES = {
         "la-region.html": ("La région — Villa Damencourt, Grande-Terre, Guadeloupe",
         "L'Autre Bord, le lagon, le spot de surf, la Porte d'Enfer : ce qu'il y a à faire autour du Moule, en Grande-Terre."),
         "journal.html": ("Journal — Villa Damencourt",
-        "Ce qui se passe à la villa : les travaux, le jardin, la saison des mangues et le carnaval du Moule.")},
+        "Ce qui se passe à la villa : les travaux, le jardin, la saison des mangues et le carnaval du Moule."),
+        "reserver.html": ("Réserver — Villa Damencourt, Le Moule, Guadeloupe",
+        "Demande de séjour sans engagement à la Villa Damencourt : dates, tarif exact et options confirmés avant tout versement. Réponse sous 24 heures.")},
  "en": {"index.html": ("Villa Damencourt — villa rental in Le Moule, Guadeloupe",
         "A contemporary creole house open to the Atlantic, four minutes on foot from Autre Bord beach. Six air-conditioned bedrooms, twelve guests, one booking at a time."),
         "la-villa.html": ("The villa — Villa Damencourt, Le Moule, Guadeloupe",
@@ -83,7 +97,9 @@ TITRES = {
         "la-region.html": ("The region — Villa Damencourt, Grande-Terre, Guadeloupe",
         "Autre Bord, the lagoon, the surf spot, Porte d'Enfer: what there is to do around Le Moule, in Grande-Terre."),
         "journal.html": ("Journal — Villa Damencourt",
-        "What happens at the villa: the works, the garden, mango season and the Le Moule carnival.")},
+        "What happens at the villa: the works, the garden, mango season and the Le Moule carnival."),
+        "reserver.html": ("Enquire — Villa Damencourt, Le Moule, Guadeloupe",
+        "A no-commitment enquiry for Villa Damencourt: dates, exact rate and options confirmed before any payment. We reply within 24 hours.")},
 }
 
 
@@ -221,6 +237,57 @@ def transformer(corps, lg, fichier):
             corps = re.sub(r'<image-slot\b(.*?)>\s*</image-slot>', remplacer_image,
                            corps, flags=re.S)
 
+    # 2 ter. Les boutons d'appel à l'action naviguaient en JavaScript : ils
+    #        deviennent de vrais liens. Sans cela ils restaient inertes — un
+    #        visiteur cliquait « Réserver » et rien ne se passait.
+    APPELS = {
+      "fr": {"Arrivée": "sejour.html", "Départ": "sejour.html",
+             "Voir les disponibilités": "reserver.html",
+             "Découvrir la villa": "la-villa.html",
+             "Toute la galerie": "galerie.html",
+             "Tout le journal": "journal.html",
+             "Réserver": "reserver.html"},
+      "en": {"Arrival": "sejour.html", "Departure": "sejour.html",
+             "See availability": "reserver.html",
+             "See the villa": "la-villa.html",
+             "The whole gallery": "galerie.html",
+             "All entries": "journal.html",
+             "Enquire": "reserver.html"},
+    }
+    def bouton_en_lien(m):
+        interieur = m.group(2)
+        nu = re.sub(r"<[^>]+>", "", interieur)
+        nu = re.sub(r"\s+", " ", H.unescape(nu)).strip().rstrip("—").strip()
+        cible = APPELS[lg].get(nu)
+        if not cible:
+            return m.group(0)
+        return '<a href="%s"%s>%s</a>' % (lien(cible, lg), m.group(1), interieur)
+    corps = re.sub(r'<button([^>]*)>(.*?)</button>', bouton_en_lien, corps, flags=re.S)
+
+    # 2 quater. Les réponses de la foire aux questions.
+    #   Elles n'existaient dans le DOM qu'une fois la question ouverte, et
+    #   l'accordéon n'en ouvre qu'une à la fois : aucune capture ne pouvait
+    #   donc les contenir toutes. Elles sont reprises du tableau de données de
+    #   l'original, et posées VISIBLES sous chaque question. Le script les
+    #   replie ; sans lui, on lit l'ensemble — jamais l'inverse.
+    if fichier == "reserver.html":
+        faq = FAQ.get(lg, [])
+        etat = {"i": 0}
+        def poser_reponse(m):
+            i = etat["i"]
+            if i >= len(faq):
+                return m.group(0)
+            etat["i"] += 1
+            return (m.group(0) +
+                    '<div class="hz-faq-r" data-faq="%d" style="padding:0 0 22px; max-width:62ch; '
+                    'font-size:15px; line-height:1.66; color:rgb(107,96,85)">%s</div>'
+                    % (i, H.escape(faq[i]["a"])))
+        corps = re.sub(r'<button[^>]*data-dc-tpl="327"[^>]*>.*?</button>',
+                       poser_reponse, corps, flags=re.S)
+        if etat["i"] != len(faq):
+            print("  ATTENTION : %d réponses posées pour %d questions (%s)"
+                  % (etat["i"], len(faq), lg))
+
     # 3. la bascule de langue : un bouton piloté par React devient un lien.
     #    Un lien s'ouvre dans un nouvel onglet, se partage, et fonctionne sans
     #    JavaScript — ce qu'un bouton ne fait pas.
@@ -281,7 +348,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "3"
+VERSION = "7"
 
 
 def main():

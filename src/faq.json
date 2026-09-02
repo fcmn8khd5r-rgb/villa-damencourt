@@ -1,0 +1,54 @@
+{
+ "fr": [
+  {
+   "q": "La maison se loue-t-elle entière ?",
+   "a": "Oui, toujours. Un seul groupe à la fois, que les six chambres soient occupées ou non. Il n’y a pas de partie réservée aux propriétaires."
+  },
+  {
+   "q": "Que comprend le tarif ?",
+   "a": "Le linge de maison et de bain, le ménage de fin de séjour, le petit-déjeuner du premier matin, la fibre, la climatisation dans les six chambres et l’accueil sur place. Le chef, les cours, la voiture, les transferts et le ménage quotidien sont en supplément."
+  },
+  {
+   "q": "Et pendant la saison cyclonique ?",
+   "a": "De juillet à octobre, la maison reste ouverte et les tarifs sont les plus bas de l’année. Tous les volets anti-cycloniques sont sur place, la citerne et le groupe de secours assurent l’eau et l’électricité, et nous proposons une assurance annulation adaptée. En cas d’alerte rouge, le séjour est reporté sans frais."
+  },
+  {
+   "q": "Quelles sont les conditions d’annulation ?",
+   "a": "Annulation sans frais jusqu’à 60 jours avant l’arrivée. Entre 60 et 45 jours, l’acompte de 30 % reste dû. À moins de 45 jours, le séjour est facturé en totalité, sauf report accepté par la maison ou alerte cyclonique."
+  },
+  {
+   "q": "Les enfants et les animaux sont-ils acceptés ?",
+   "a": "Les enfants sont bienvenus : lits parapluie, chaises hautes et garde sur demande. La piscine est équipée d’une alarme, non clôturée. Un chien est accepté au cas par cas, moyennant un forfait ménage de 150 €."
+  },
+  {
+   "q": "Faut-il une voiture ?",
+   "a": "Oui. La plage se fait à pied, mais tout le reste de l’île demande une voiture. Nous la faisons livrer à la villa le jour de votre arrivée, ce qui évite le comptoir de l’aéroport."
+  }
+ ],
+ "en": [
+  {
+   "q": "Is the house let whole?",
+   "a": "Always. One group at a time, whether or not all six bedrooms are used. There is no owners’ wing."
+  },
+  {
+   "q": "What does the rate include?",
+   "a": "Household and bath linen, end-of-stay cleaning, the first morning’s breakfast, fibre, air conditioning in all six bedrooms and the welcome in person. Chef, lessons, car, transfers and daily cleaning are extra."
+  },
+  {
+   "q": "What about the hurricane season?",
+   "a": "From July to October the house stays open and the rates are the lowest of the year. All the hurricane shutters are on site, the cistern and backup generator cover water and power, and we offer suitable cancellation cover. If a red alert is declared, the stay is postponed at no cost."
+  },
+  {
+   "q": "What is the cancellation policy?",
+   "a": "Free cancellation up to 60 days before arrival. Between 60 and 45 days, the 30% deposit is retained. Within 45 days the stay is charged in full, unless we agree to a postponement or a hurricane alert is declared."
+  },
+  {
+   "q": "Are children and pets welcome?",
+   "a": "Children are welcome: travel cots, high chairs and childcare on request. The pool has an alarm but no fence. One dog is considered case by case, with a €150 cleaning supplement."
+  },
+  {
+   "q": "Do we need a car?",
+   "a": "Yes. The beach is on foot, but the rest of the island needs a car. We have it delivered to the villa on the day you arrive, which saves the airport desk."
+  }
+ ]
+}
