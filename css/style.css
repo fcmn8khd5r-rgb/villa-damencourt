@@ -362,3 +362,12 @@ button { min-height: 44px; }
     font-size: 10px !important;
   }
 }
+
+/* Les boutons d'appel devenus des liens.
+   Un <button> est « inline-block », un <a> est « inline ». La différence
+   n'est pas cosmétique : un élément inline ignore les marges verticales, et
+   son rembourrage comme sa bordure se peignent HORS de la ligne, par-dessus
+   ce qui l'entoure. Le « Réserver » du pied de page, haut de 47 px pour une
+   ligne de 22, recouvrait ainsi l'adresse électronique juste au-dessus — sur
+   tous les téléphones, et c'était ma conversion qui l'avait causé. */
+.hz-cta { display: inline-block; }

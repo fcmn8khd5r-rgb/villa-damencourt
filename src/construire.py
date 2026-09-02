@@ -326,12 +326,26 @@ def transformer(corps, lg, fichier):
     }
     def bouton_en_lien(m):
         interieur = m.group(2)
+        attrs = m.group(1)
         nu = re.sub(r"<[^>]+>", "", interieur)
         nu = re.sub(r"\s+", " ", H.unescape(nu)).strip().rstrip("—").strip()
         cible = APPELS[lg].get(nu)
         if not cible:
             return m.group(0)
-        return '<a href="%s"%s>%s</a>' % (lien(cible, lg), m.group(1), interieur)
+        # Un <button> est « inline-block » par défaut, un <a> est « inline ».
+        # La différence n'est pas cosmétique : un élément inline IGNORE les
+        # marges verticales, et son rembourrage comme sa bordure se peignent
+        # HORS de la ligne, par-dessus ce qui l'entoure. Le bouton « Réserver »
+        # du pied de page, haut de 47 px pour une ligne de 22, recouvrait ainsi
+        # l'adresse électronique juste au-dessus — sur tous les téléphones.
+        # La classe rétablit le comportement du bouton d'origine. Elle est sans
+        # effet là où le parent est une grille ou une boîte flexible, ces
+        # contextes ramenant de toute façon leurs enfants au mode bloc.
+        if re.search(r'\bclass="', attrs):
+            attrs = re.sub(r'\bclass="', 'class="hz-cta ', attrs, count=1)
+        else:
+            attrs = ' class="hz-cta"' + attrs
+        return '<a href="%s"%s>%s</a>' % (lien(cible, lg), attrs, interieur)
     corps = re.sub(r'<button([^>]*)>(.*?)</button>', bouton_en_lien, corps, flags=re.S)
 
     # 2 quater. Les réponses de la foire aux questions.
@@ -473,7 +487,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "20"
+VERSION = "21"
 
 
 def main():
