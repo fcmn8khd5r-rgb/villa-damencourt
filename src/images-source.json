@@ -1,27 +1,206 @@
 {
  "_note": "Photos du site, rapatriées depuis Unsplash. Elles étaient chargées à distance à chaque visite : 2 Mo pour la seule page d'accueil, des fichiers à 550 Ko mettant jusqu'à 2,3 s. Chaque entrée porte l'identifiant Unsplash, le rapport de forme attendu, le texte alternatif et le crédit — la licence Unsplash n'exige pas l'attribution, on la donne quand même.",
- "hz-home-a":   {"id":"photo-1613977257365-aaae5a9817ff", "forme":"4/3",  "alt":"La villa vue du jardin, façade sur l'Atlantique", "credit":"John Fornander", "profil":"johnfo"},
- "hz-home-b":   {"id":"photo-1544984243-ec57ea16fe25",   "forme":"3/4",  "alt":"La varangue et ses fauteuils de rotin, en fin de journée", "credit":"Roberto Nickson", "profil":"rpnickson"},
- "hz-villa-wide":{"id":"photo-1582268611958-ebfd161ef9cf","forme":"21/9","alt":"La case créole dans son jardin, vue panoramique", "credit":"Florian Schmidinger", "profil":"florianschmidinger"},
- "hz-room-1":   {"id":"photo-1710883734891-93709398496d","forme":"4/3",  "alt":"Autre Bord", "credit":"Modunite Ltd", "profil":"modunite"},
- "hz-gal-1":    {"id":"photo-1613977257363-707ba9348227","forme":"1/1",  "alt":"La piscine, fin d'après-midi", "credit":"John Fornander", "profil":"johnfo"},
- "hz-gal-2":    {"id":"photo-1757924461488-ef9ad0670978","forme":"1/1",  "alt":"Le salon ouvert", "credit":"Aalo Lens", "profil":"aalolens"},
- "hz-gal-3":    {"id":"photo-1728048756938-de1ccee0ab15","forme":"1/1",  "alt":"La maison vue du ciel", "credit":"Antonio Araujo", "profil":"antonioaraujo"},
- "hz-gal-4":    {"id":"photo-1649663724528-3bd2ce98b6e3","forme":"1/1",  "alt":"La grande table", "credit":"Liona Toussaint", "profil":"lionatoussaint"},
- "hz-gal-5":    {"id":"photo-1721989518229-3e84837fc398","forme":"1/1",  "alt":"Le salon d'ombre", "credit":"Sanju Pandita", "profil":"sanjupandita"},
- "hz-gal-6":    {"id":"photo-1505843513577-22bb7d21e455","forme":"1/1",  "alt":"La façade au crépuscule", "credit":"Daniel Barnes", "profil":"danielbarnes"},
- "hz-gal-7":    {"id":"photo-1601086540476-7d9fa9dd6023","forme":"1/1",  "alt":"La cuisine d'été", "credit":"Frames For Your Heart", "profil":"framesforyourheart"},
- "hz-gal-8":    {"id":"photo-1613152184920-bc1c4ab7fd1d","forme":"1/1",  "alt":"Le jardin", "credit":"Ferdinand Asakome", "profil":"ferdinandasakome"},
- "hz-gal-9":    {"id":"photo-1716807335126-54532f2ed0c3","forme":"1/1",  "alt":"Le salon du soir", "credit":"Hugo Richard", "profil":"hugorichard"},
- "hz-exp-2":    {"id":"photo-1757769056231-8929c994701a","forme":"4/3",  "alt":"Le lagon", "credit":"erikmagkekse", "profil":"erikmagkekse"},
- "hz-exp-3":    {"id":"photo-1597941977002-3511c5899ad6","forme":"4/3",  "alt":"Le spot de surf", "credit":"joepregadio", "profil":"joepregadio"},
- "hz-exp-4":    {"id":"photo-1785187037248-d6614aba8204","forme":"4/3",  "alt":"La Porte d'Enfer", "credit":"ewen_r_photographie", "profil":"ewen_r_photographie"},
- "hz-exp-5":    {"id":"photo-1732800643780-9605ca7d83fd","forme":"4/3",  "alt":"Le tour de Grande-Terre", "credit":"davidvives", "profil":"davidvives"},
- "hz-exp-6":    {"id":"photo-1502759683299-cdcd6974244f","forme":"4/3",  "alt":"Les fins de journée", "credit":"soyprome", "profil":"soyprome"},
- "hz-post-1":   {"id":"photo-1691389001997-af8d69e375ce","forme":"3/2",  "alt":"Deux ailes de kite et un rack sous le carbet", "credit":"evgenit", "profil":"evgenit"},
- "hz-post-2":   {"id":"photo-1776707738415-51e0dd02c458","forme":"3/2",  "alt":"Les volets anti-cycloniques ont été refaits", "credit":"zeltisevs", "profil":"zeltisevs"},
- "hz-post-3":   {"id":"photo-1759756949072-fbc8504c76d3","forme":"3/2",  "alt":"La saison des mangues a commencé au fond du jardin", "credit":"abrahamnoah", "profil":"abrahamnoah"},
- "hz-post-4":   {"id":"photo-1651099362943-dc4d0e7d228d","forme":"3/2",  "alt":"Le jardin créole a repris derrière la citerne", "credit":"davidlangfyi", "profil":"davidlangfyi"},
- "hz-post-5":   {"id":"photo-1767510533188-719c5f9ab4dd","forme":"3/2",  "alt":"Une visite de la distillerie, et une caisse rapportée", "credit":"madeline_sd", "profil":"madeline_sd"},
- "hz-post-6":   {"id":"photo-1759807859616-54237daa894e","forme":"3/2",  "alt":"Le carnaval passe devant le chemin", "credit":"j_35mm", "profil":"j_35mm"}
+ "hz-home-a": {
+  "id": "photo-1613977257365-aaae5a9817ff",
+  "forme": "4/3",
+  "alt": "La villa vue du jardin, façade sur l'Atlantique",
+  "credit": "John Fornander",
+  "profil": "johnfo"
+ },
+ "hz-home-b": {
+  "id": "photo-1544984243-ec57ea16fe25",
+  "forme": "3/4",
+  "alt": "La varangue et ses fauteuils de rotin, en fin de journée",
+  "credit": "Roberto Nickson",
+  "profil": "rpnickson"
+ },
+ "hz-villa-wide": {
+  "id": "photo-1582268611958-ebfd161ef9cf",
+  "forme": "21/9",
+  "alt": "La case créole dans son jardin, vue panoramique",
+  "credit": "Florian Schmidinger",
+  "profil": "florianschmidinger"
+ },
+ "hz-room-1": {
+  "id": "photo-1710883734891-93709398496d",
+  "forme": "4/3",
+  "alt": "Autre Bord",
+  "credit": "Modunite Ltd",
+  "profil": "modunite"
+ },
+ "hz-gal-1": {
+  "id": "photo-1613977257363-707ba9348227",
+  "forme": "1/1",
+  "alt": "La piscine, fin d'après-midi",
+  "credit": "John Fornander",
+  "profil": "johnfo"
+ },
+ "hz-gal-2": {
+  "id": "photo-1757924461488-ef9ad0670978",
+  "forme": "1/1",
+  "alt": "Le salon ouvert",
+  "credit": "Aalo Lens",
+  "profil": "aalolens"
+ },
+ "hz-gal-3": {
+  "id": "photo-1728048756938-de1ccee0ab15",
+  "forme": "1/1",
+  "alt": "La maison vue du ciel",
+  "credit": "Antonio Araujo",
+  "profil": "antonioaraujo"
+ },
+ "hz-gal-4": {
+  "id": "photo-1649663724528-3bd2ce98b6e3",
+  "forme": "1/1",
+  "alt": "La grande table",
+  "credit": "Liona Toussaint",
+  "profil": "lionatoussaint"
+ },
+ "hz-gal-5": {
+  "id": "photo-1721989518229-3e84837fc398",
+  "forme": "1/1",
+  "alt": "Le salon d'ombre",
+  "credit": "Sanju Pandita",
+  "profil": "sanjupandita"
+ },
+ "hz-gal-6": {
+  "id": "photo-1505843513577-22bb7d21e455",
+  "forme": "1/1",
+  "alt": "La façade au crépuscule",
+  "credit": "Daniel Barnes",
+  "profil": "danielbarnes"
+ },
+ "hz-gal-7": {
+  "id": "photo-1601086540476-7d9fa9dd6023",
+  "forme": "1/1",
+  "alt": "La cuisine d'été",
+  "credit": "Frames For Your Heart",
+  "profil": "framesforyourheart"
+ },
+ "hz-gal-8": {
+  "id": "photo-1613152184920-bc1c4ab7fd1d",
+  "forme": "1/1",
+  "alt": "Le jardin",
+  "credit": "Ferdinand Asakome",
+  "profil": "ferdinandasakome"
+ },
+ "hz-gal-9": {
+  "id": "photo-1716807335126-54532f2ed0c3",
+  "forme": "1/1",
+  "alt": "Le salon du soir",
+  "credit": "Hugo Richard",
+  "profil": "hugorichard"
+ },
+ "hz-exp-2": {
+  "id": "photo-1757769056231-8929c994701a",
+  "forme": "4/3",
+  "alt": "Le lagon",
+  "credit": "erikmagkekse",
+  "profil": "erikmagkekse"
+ },
+ "hz-exp-3": {
+  "id": "photo-1597941977002-3511c5899ad6",
+  "forme": "4/3",
+  "alt": "Le spot de surf",
+  "credit": "joepregadio",
+  "profil": "joepregadio"
+ },
+ "hz-exp-4": {
+  "id": "photo-1785187037248-d6614aba8204",
+  "forme": "4/3",
+  "alt": "La Porte d'Enfer",
+  "credit": "ewen_r_photographie",
+  "profil": "ewen_r_photographie"
+ },
+ "hz-exp-5": {
+  "id": "photo-1732800643780-9605ca7d83fd",
+  "forme": "4/3",
+  "alt": "Le tour de Grande-Terre",
+  "credit": "davidvives",
+  "profil": "davidvives"
+ },
+ "hz-exp-6": {
+  "id": "photo-1502759683299-cdcd6974244f",
+  "forme": "4/3",
+  "alt": "Les fins de journée",
+  "credit": "soyprome",
+  "profil": "soyprome"
+ },
+ "hz-post-1": {
+  "id": "photo-1691389001997-af8d69e375ce",
+  "forme": "3/2",
+  "alt": "Deux ailes de kite et un rack sous le carbet",
+  "credit": "evgenit",
+  "profil": "evgenit"
+ },
+ "hz-post-2": {
+  "id": "photo-1776707738415-51e0dd02c458",
+  "forme": "3/2",
+  "alt": "Les volets anti-cycloniques ont été refaits",
+  "credit": "zeltisevs",
+  "profil": "zeltisevs"
+ },
+ "hz-post-3": {
+  "id": "photo-1759756949072-fbc8504c76d3",
+  "forme": "3/2",
+  "alt": "La saison des mangues a commencé au fond du jardin",
+  "credit": "abrahamnoah",
+  "profil": "abrahamnoah"
+ },
+ "hz-post-4": {
+  "id": "photo-1651099362943-dc4d0e7d228d",
+  "forme": "3/2",
+  "alt": "Le jardin créole a repris derrière la citerne",
+  "credit": "davidlangfyi",
+  "profil": "davidlangfyi"
+ },
+ "hz-post-5": {
+  "id": "photo-1767510533188-719c5f9ab4dd",
+  "forme": "3/2",
+  "alt": "Une visite de la distillerie, et une caisse rapportée",
+  "credit": "madeline_sd",
+  "profil": "madeline_sd"
+ },
+ "hz-post-6": {
+  "id": "photo-1759807859616-54237daa894e",
+  "forme": "3/2",
+  "alt": "Le carnaval passe devant le chemin",
+  "credit": "j_35mm",
+  "profil": "j_35mm"
+ },
+ "hz-room-2": {
+  "id": "photo-1512918728675-ed5a9ecdebfd",
+  "forme": "4/3",
+  "alt": "Damencourt",
+  "credit": "Unsplash",
+  "profil": ""
+ },
+ "hz-room-3": {
+  "id": "photo-1708111776235-990d08c84658",
+  "forme": "4/3",
+  "alt": "Zévallos",
+  "credit": "Unsplash",
+  "profil": ""
+ },
+ "hz-room-4": {
+  "id": "photo-1521783593447-5702b9bfd267",
+  "forme": "4/3",
+  "alt": "Salabouelle",
+  "credit": "Unsplash",
+  "profil": ""
+ },
+ "hz-room-5": {
+  "id": "photo-1752769041878-f24e37fd6aea",
+  "forme": "4/3",
+  "alt": "Porte d'Enfer",
+  "credit": "Unsplash",
+  "profil": ""
+ },
+ "hz-room-6": {
+  "id": "photo-1596178067639-5c6e68aea6dc",
+  "forme": "4/3",
+  "alt": "Le Carbet",
+  "credit": "Unsplash",
+  "profil": ""
+ }
 }

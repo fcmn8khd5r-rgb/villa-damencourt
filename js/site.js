@@ -148,4 +148,142 @@
       if (e.key === "ArrowLeft") montrer(courant - 1);
     });
   }
+
+  /* ---- calendrier de la page « séjour » ---------------------------------- */
+  /* Il affiche deux mois et se navigue par les flèches. Il ne sert pas à
+     choisir des dates : l'original ne le permettait pas non plus — cliquer un
+     jour n'y produisait aucun effet, vérifié avant de le réécrire. On
+     reproduit donc ce qu'il faisait, et rien de plus : deux mois, les jours
+     pris barrés, et les flèches qui avancent ou reculent.
+
+     Sans ce script, la page garde les deux mois figés au moment de la
+     construction. C'est moins pratique, mais parfaitement lisible — le
+     tableau des tarifs, lui, est du texte et ne dépend de rien. */
+  var MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet",
+                 "août","septembre","octobre","novembre","décembre"];
+  var MOIS_EN = ["January","February","March","April","May","June","July",
+                 "August","September","October","November","December"];
+  var JOURS_FR = ["L","M","M","J","V","S","D"], JOURS_EN = ["M","T","W","T","F","S","S"];
+
+  var STYLE_JOUR = "font-family: Jost, sans-serif; font-size: 13px; aspect-ratio: 1 / 1; " +
+    "display: flex; align-items: center; justify-content: center; border-radius: 2px; " +
+    "transition: background 250ms, color 250ms, border-color 250ms; " +
+    "border: 1px solid rgb(220, 209, 191); ";
+  var LIBRE = "background: transparent; color: rgb(43, 36, 30); cursor: pointer; text-decoration: none;";
+  var PRIS  = "background: rgb(228, 218, 202); color: rgb(166, 150, 130); cursor: not-allowed; " +
+              "text-decoration: line-through;";
+  var STYLE_INITIALE = "font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; " +
+    "text-align: center; color: rgb(154, 140, 124); padding-bottom: 8px;";
+
+  /* Les périodes prises sont simulées — la villa est fictive. Elles doivent
+     en revanche être STABLES : un calendrier qui change de réservations à
+     chaque affichage se remarque tout de suite. On les tire donc d'une
+     empreinte du mois, pas d'un tirage au sort. */
+  function empreinte(a, m) {
+    var h = 2166136261 ^ (a * 12 + m);
+    h = Math.imul(h ^ (h >>> 13), 16777619);
+    return ((h >>> 0) % 1000) / 1000;
+  }
+  function prises(a, m) {
+    var n = new Date(Date.UTC(a, m + 1, 0)).getUTCDate();
+    var e = empreinte(a, m);
+    if (e > 0.62) return {};                       // un mois sur trois reste libre
+    var debut = 1 + Math.floor(e * (n - 12));
+    var duree = 7 + Math.floor(empreinte(a, m + 40) * 8);
+    var out = {};
+    for (var j = debut; j < Math.min(debut + duree, n + 1); j++) out[j] = true;
+    return out;
+  }
+
+  var cal = (function () {
+    var motif = /^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}$/i;
+    var titres = $$("p").filter(function (p) { return motif.test((p.textContent || "").trim()); });
+    if (titres.length < 2) return null;
+    var blocs = titres.map(function (p) { return p.parentElement; });
+    var fleches = $$("button").filter(function (b) { return /^[‹›]$/.test((b.textContent || "").trim()); });
+    if (fleches.length < 2) return null;
+    return { titres: titres, blocs: blocs, precedent: fleches[0], suivant: fleches[1] };
+  })();
+
+  if (cal) {
+    var en = document.documentElement.lang === "en";
+    var noms = en ? MOIS_EN : MOIS_FR, inits = en ? JOURS_EN : JOURS_FR;
+    // On repart du mois affiché à la construction pour ne rien déplacer.
+    var t0 = (cal.titres[0].textContent || "").trim().split(/\s+/);
+    var base = new Date(Date.UTC(parseInt(t0[t0.length - 1], 10),
+                                 Math.max(0, noms.findIndex(function (x) {
+                                   return x.toLowerCase() === t0[0].toLowerCase(); })), 1));
+
+    var dessiner = function (bloc, titre, d) {
+      var a = d.getUTCFullYear(), m = d.getUTCMonth();
+      titre.textContent = noms[m] + " " + a;
+      var grille = Array.prototype.filter.call(bloc.children, function (c) {
+        return c.tagName !== "P"; })[0];
+      if (!grille) return;
+      var pris = prises(a, m);
+      var premier = (new Date(Date.UTC(a, m, 1)).getUTCDay() + 6) % 7;  // lundi = 0
+      var n = new Date(Date.UTC(a, m + 1, 0)).getUTCDate();
+      var html = inits.map(function (i) {
+        return '<div style="' + STYLE_INITIALE + '"><span class="sc-interp">' + i + '</span></div>';
+      }).join("");
+      for (var v = 0; v < premier; v++) html += "<div></div>";
+      for (var j = 1; j <= n; j++) {
+        html += '<button type="button" style="' + STYLE_JOUR + (pris[j] ? PRIS : LIBRE) + '"' +
+                (pris[j] ? ' disabled aria-label="' + j + ' ' + noms[m] + ' ' + a +
+                           (en ? ', booked"' : ', réservé"') : "") +
+                '><span class="sc-interp">' + j + '</span></button>';
+      }
+      grille.innerHTML = html;
+    };
+
+    var poser = function () {
+      var d1 = new Date(base);
+      var d2 = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth() + 1, 1));
+      dessiner(cal.blocs[0], cal.titres[0], d1);
+      dessiner(cal.blocs[1], cal.titres[1], d2);
+      // On ne recule pas avant le mois courant : proposer un passé n'a pas de sens.
+      var maintenant = new Date();
+      var plancher = new Date(Date.UTC(maintenant.getFullYear(), maintenant.getMonth(), 1));
+      cal.precedent.disabled = base <= plancher;
+      cal.precedent.style.opacity = cal.precedent.disabled ? ".35" : "";
+      cal.precedent.style.cursor = cal.precedent.disabled ? "not-allowed" : "pointer";
+    };
+    var glisser = function (n) {
+      base = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth() + n, 1));
+      poser();
+    };
+    cal.precedent.addEventListener("click", function () { if (!cal.precedent.disabled) glisser(-1); });
+    cal.suivant.addEventListener("click", function () { glisser(1); });
+    poser();
+  }
+
+
+  /* ---- onglets de chambres ---------------------------------------------- */
+  /* Les six chambres sont toutes dans la page ; on montre celle qu'on demande.
+     Sans ce script, la première reste affichée et les cinq autres restent
+     masquées : la page reste lisible, seule la navigation entre chambres
+     manque. C'est le compromis à retenir quand un script peut ne pas se
+     charger — jamais l'inverse. */
+  var onglets = $$("[data-onglet]");
+  var chambres = $$("[data-chambre]");
+  if (onglets.length && chambres.length) {
+    var actif = onglets[0].getAttribute("style") || "";
+    var repos = onglets[1] ? (onglets[1].getAttribute("style") || "") : actif;
+    onglets.forEach(function (o) {
+      o.addEventListener("click", function () {
+        var cle = o.getAttribute("data-onglet");
+        chambres.forEach(function (c) {
+          if (c.getAttribute("data-chambre") === cle) c.removeAttribute("hidden");
+          else c.setAttribute("hidden", "");
+        });
+        onglets.forEach(function (x) {
+          var choisi = x === o;
+          x.setAttribute("style", choisi ? actif : repos);
+          if (choisi) x.setAttribute("aria-current", "true");
+          else x.removeAttribute("aria-current");
+        });
+      });
+    });
+  }
+
 })();

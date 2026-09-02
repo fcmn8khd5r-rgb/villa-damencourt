@@ -87,6 +87,57 @@ TITRES = {
 }
 
 
+
+CHAMBRES = ["autrebord", "damencourt", "zévallos", "salabouelle", "portedenfer", "lecarbet"]
+
+
+def _deux_blocs(html):
+    """Sépare la barre d'onglets du contenu : ce sont les deux div de tête."""
+    prof, debuts = 0, []
+    for m in re.finditer(r"<(/?)(\w[\w-]*)[^>]*?(/?)>", html):
+        if m.group(1):
+            prof -= 1
+            if prof == 0 and debuts:
+                debuts[-1] = (debuts[-1][0], m.end())
+        elif not m.group(3) and m.group(2) not in ("br", "img", "input", "source", "meta", "link"):
+            if prof == 0:
+                debuts.append((m.start(), None))
+            prof += 1
+    bouts = [html[a:b] for a, b in debuts if b]
+    return (bouts + ["", ""])[:2]
+
+
+def panneaux_chambres(lg):
+    """Les six chambres réunies dans la page, une seule visible à la fois.
+
+    La page capturée ne contenait que l'onglet actif au moment de la capture :
+    les cinq autres n'existaient nulle part, et les boutons ne pouvaient rien
+    montrer. Chaque onglet a donc été rouvert dans l'original et capturé à son
+    tour. Ils sont ici réunis — la barre d'onglets une seule fois, puis les six
+    contenus, dont un seul est affiché."""
+    prefixe = "" if lg == "fr" else "en-"
+    barre, panneaux = None, []
+    for cle in CHAMBRES:
+        f = os.path.join(CAPTURE, "%songlet-%s.html" % (prefixe, cle))
+        if not os.path.exists(f):
+            return None
+        b, contenu = _deux_blocs(open(f, encoding="utf-8").read())
+        if barre is None:
+            barre = b
+        panneaux.append('<div data-chambre="%s"%s>%s</div>'
+                        % (cle, "" if cle == CHAMBRES[0] else ' hidden', contenu))
+    # chaque bouton de la barre reçoit la clé de sa chambre, dans l'ordre
+    i = [0]
+    def marquer(m):
+        if i[0] >= len(CHAMBRES):
+            return m.group(0)
+        cle = CHAMBRES[i[0]]; i[0] += 1
+        return m.group(0)[:-1] + ' data-onglet="%s"%s>' % (
+            cle, ' aria-current="true"' if cle == CHAMBRES[0] else "")
+    barre = re.sub(r'<button[^>]*data-dc-tpl="134"[^>]*>', marquer, barre)
+    return barre + "\n" + "\n".join(panneaux)
+
+
 def lien(fichier, lg):
     base = "/" if lg == "fr" else "/en/"
     return base if fichier == "index.html" else base + fichier
@@ -152,6 +203,24 @@ def transformer(corps, lg, fichier):
             m.group("pre2"), m.group(3)),
         corps)
 
+    # 2 bis. les six chambres, réunies dans la page
+    if fichier == "chambres.html":
+        tout = panneaux_chambres(lg)
+        if tout:
+            # la section des chambres est celle qui porte les boutons d'onglet
+            def remplacer_section(m):
+                return m.group(1) + tout + m.group(3)
+            corps, n = re.subn(
+                r'(<section\b[^>]*>)(.*?data-dc-tpl="134".*?)(</section>)',
+                remplacer_section, corps, count=1, flags=re.S)
+            if not n:
+                print("  ATTENTION : section des chambres non trouvée (%s)" % lg)
+            # Les panneaux réunis apportent leurs propres <image-slot> : on
+            # repasse la conversion, sans quoi cinq chambres sur six
+            # afficheraient un emplacement vide.
+            corps = re.sub(r'<image-slot\b(.*?)>\s*</image-slot>', remplacer_image,
+                           corps, flags=re.S)
+
     # 3. la bascule de langue : un bouton piloté par React devient un lien.
     #    Un lien s'ouvre dans un nouvel onglet, se partage, et fonctionne sans
     #    JavaScript — ce qu'un bouton ne fait pas.
@@ -209,7 +278,10 @@ GABARIT = """<!doctype html>
 """
 
 SITE = "https://villa-damencourt.example"
-VERSION = "1"
+# Le numéro de version force le navigateur à reprendre CSS et JavaScript.
+# À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
+# venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
+VERSION = "3"
 
 
 def main():

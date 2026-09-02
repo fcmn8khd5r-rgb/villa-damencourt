@@ -703,6 +703,157 @@
    }
   }
  },
+ "hz-room-2": {
+  "alt": "Damencourt",
+  "attente": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAwAAwBSJYgCdAEOcx3+8eAA/uCCeYPTUh4NpXWxQfByPFSJ2AVxz6SFuwixEQUnmBSPAF+LnXGV8A+tXMm0ZURVlKPSZZu43wHgxhVAAA==",
+  "credit": "Unsplash",
+  "forme": "4/3",
+  "h": 1600,
+  "l": 2133,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 49173,
+    "webp": 66834
+   },
+   "1920": {
+    "avif": 85448,
+    "webp": 123312
+   },
+   "2133": {
+    "avif": 104455,
+    "webp": 152434
+   },
+   "480": {
+    "avif": 15582,
+    "webp": 16606
+   },
+   "800": {
+    "avif": 27678,
+    "webp": 34742
+   }
+  }
+ },
+ "hz-room-3": {
+  "alt": "Zévallos",
+  "attente": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABwAQCdASoQAAwAAwBSJQBOgAeAAAD68jMJ4QeZYBBYI+oO0+dCI7KjxWPsSkXda7ogrLrVbMTJNyEXaKfNY/LolLiXPsEC2xDo6r9yQAAAAA==",
+  "credit": "Unsplash",
+  "forme": "4/3",
+  "h": 1350,
+  "l": 1800,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 84272,
+    "webp": 112562
+   },
+   "1800": {
+    "avif": 155984,
+    "webp": 217596
+   },
+   "480": {
+    "avif": 14962,
+    "webp": 15520
+   },
+   "800": {
+    "avif": 32633,
+    "webp": 40370
+   }
+  }
+ },
+ "hz-room-4": {
+  "alt": "Salabouelle",
+  "attente": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAwAAwBSJZwAAjq5cehPsqAA/prbPeNR3MN+Gdmc7MV3TfvvP+KWT95ERFiO9TKciBoLMTKiUQa20NrRgU7WXClRej5QExPB00jy5PDbAotnoUAAAA==",
+  "credit": "Unsplash",
+  "forme": "4/3",
+  "h": 1800,
+  "l": 2400,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 57584,
+    "webp": 79652
+   },
+   "1920": {
+    "avif": 96324,
+    "webp": 137040
+   },
+   "2400": {
+    "avif": 135107,
+    "webp": 208322
+   },
+   "480": {
+    "avif": 16837,
+    "webp": 18072
+   },
+   "800": {
+    "avif": 31428,
+    "webp": 39508
+   }
+  }
+ },
+ "hz-room-5": {
+  "alt": "Porte d'Enfer",
+  "attente": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAAwBSJagCdH8AGEhApuZSAAD+4o6TWeZyyziYRDM1s5Ezjq/Hb2IQw82PBF/Cf6+51NQhIPj/lN7zxduDeRUaoP78sdqN1uSLsH4f5RgAAAA=",
+  "credit": "Unsplash",
+  "forme": "4/3",
+  "h": 1800,
+  "l": 2400,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 63653,
+    "webp": 93034
+   },
+   "1920": {
+    "avif": 103402,
+    "webp": 171018
+   },
+   "2400": {
+    "avif": 138948,
+    "webp": 240326
+   },
+   "480": {
+    "avif": 20160,
+    "webp": 22348
+   },
+   "800": {
+    "avif": 36817,
+    "webp": 47176
+   }
+  }
+ },
+ "hz-room-6": {
+  "alt": "Le Carbet",
+  "attente": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABQAgCdASoQAAwAAwBSJbACdAYvDyvIJCP3/AAA/t1sOOWDWlKmIGlnfzwyCE+uEkD2Bg1hhj1QBz1rnNPMkzSvpz6exyt83U9qELq8cG0Yw7vDtNyXDT7Cr7wHC+r6Mlp7oL/QbFvwB3AA",
+  "credit": "Unsplash",
+  "forme": "4/3",
+  "h": 1602,
+  "l": 2136,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 232353,
+    "webp": 268972
+   },
+   "1920": {
+    "avif": 460808,
+    "webp": 554684
+   },
+   "2136": {
+    "avif": 582898,
+    "webp": 692498
+   },
+   "480": {
+    "avif": 42162,
+    "webp": 45334
+   },
+   "800": {
+    "avif": 102098,
+    "webp": 113486
+   }
+  }
+ },
  "hz-villa-wide": {
   "alt": "La case créole dans son jardin, vue panoramique",
   "attente": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAAcAAwBSJZACdADDihxjAAD+uBMXGvWajp0pBfL/ST5YXyMDLeFjkKjJQhsz6WhdP4J5S6yNtE07LJ7CN3E5V8t6qhz28IOCzAAA",
