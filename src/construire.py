@@ -375,13 +375,14 @@ def transformer(corps, lg, fichier):
     # plan sur la seconde. On les reconnaît à l'identifiant Pexels de la source
     # d'origine.
     VIDEOS = {
-      "12021278": ("plage", "/assets/img/hz-exp-1-800.webp"),
-      "31931891": ("aerienne", "/assets/img/hz-exp-2-800.webp"),
+      "12021278": ("plage", "hz-exp-1", [480, 800, 1280, 1800]),
+      "31931891": ("aerienne", "hz-exp-2", [480, 800, 1280, 1920, 2400]),
     }
     def remplacer_video(m):
         t = m.group(0)
         ident = re.search(r"video-files/(\d+)/", t)
-        nom, affiche = VIDEOS.get(ident.group(1) if ident else "", VIDEOS["12021278"])
+        nom, base, tailles = VIDEOS.get(ident.group(1) if ident else "", VIDEOS["12021278"])
+        affiche = "/assets/img/%s-800.webp" % base
         # On conserve le style d'origine : c'est lui qui donne la forme du
         # cadre (plein écran sur l'accueil, bandeau 21/9 sur la région).
         #
@@ -398,11 +399,36 @@ def transformer(corps, lg, fichier):
         propre = re.sub(r'\s*animation\s*:[^;"]*;?', '',
                         style.group(1) if style else '') or \
                  "width:100%;height:100%;object-fit:cover"
-        return ('<video class="hz-video" autoplay muted loop playsinline preload="metadata" '
+        # Une vraie image SOUS la vidéo, et la vidéo cachée tant qu'elle ne
+        # joue pas.
+        #
+        # Il n'y avait ici que l'attribut « poster ». Or un navigateur qui
+        # refuse la lecture automatique — Safari avec l'économie d'énergie, ou
+        # le réglage « ne jamais lire » — dessine SON PROPRE bouton de lecture
+        # par-dessus l'élément vidéo. C'est le « play » qu'il fallait presser.
+        # Sur Maison Rorota le même refus ne se voyait pas, parce que la vidéo
+        # y est transparente tant qu'elle ne joue pas et qu'une image la
+        # double : le bouton du navigateur était dessiné, mais invisible.
+        #
+        # Même dispositif ici. L'image porte la dérive, la vidéo apparaît en
+        # fondu quand elle joue vraiment, et le bouton du navigateur ne peut
+        # plus se voir. La vidéo cachée ne reçoit pas les clics : c'est la
+        # page entière qui écoute, et un clic n'importe où relance la lecture.
+        def jeu(ext):
+            return ", ".join("/assets/img/%s-%d.%s %dw" % (base, w, ext, w)
+                             for w in tailles)
+        return ('<picture class="hz-affiche" aria-hidden="true">'
+                '<source type="image/avif" srcset="%s" sizes="100vw">'
+                '<source type="image/webp" srcset="%s" sizes="100vw">'
+                '<img src="%s" alt="" decoding="async" style="%s">'
+                '</picture>'
+                '<video class="hz-video" autoplay muted loop playsinline preload="auto" '
                 'aria-hidden="true" poster="%s" style="%s">'
                 '<source src="/assets/video/%s-640.mp4" type="video/mp4" media="(max-width:700px)">'
                 '<source src="/assets/video/%s-960.mp4" type="video/mp4">'
-                '</video>' % (affiche, propre, nom, nom))
+                '</video>'
+                % (jeu("avif"), jeu("webp"), affiche, propre,
+                   affiche, propre, nom, nom))
     corps = re.sub(r'<video\b[^>]*>.*?</video>', remplacer_video, corps, flags=re.S)
 
     # 5. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
@@ -447,7 +473,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "18"
+VERSION = "20"
 
 
 def main():

@@ -382,9 +382,9 @@
          rejetée, que l'on ignore. */
       var essais = 0;
       var relance = setInterval(function () {
-        if (!v.paused || ++essais > 12) { clearInterval(relance); return; }
+        if (!v.paused || ++essais > 40) { clearInterval(relance); return; }
         tenter();
-      }, 500);
+      }, 250);
       document.addEventListener("visibilitychange", function () {
         if (!document.hidden) tenter();
       });

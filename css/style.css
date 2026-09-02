@@ -292,16 +292,38 @@ button { min-height: 44px; }
   margin-top: 1.1rem; border-top: 1px solid #D8CEC0;
 }
 
-/* La vidéo d'accueil : fondu d'entrée ET dérive de repli.
-   La dérive est ce qui rend une lecture refusée indiscernable d'une lecture
-   qui part : l'affiche bouge, personne ne cherche un bouton. Elle s'arrête
-   dès que la vidéo joue vraiment — c'est alors elle qui porte le mouvement. */
-.hz-video {
+/* L'affiche du héros, et la vidéo qui vient par-dessus.
+
+   La vidéo est TRANSPARENTE tant qu'elle ne joue pas. C'est le point : un
+   navigateur qui refuse la lecture automatique dessine son propre bouton de
+   lecture sur l'élément vidéo, et c'est ce bouton qu'il fallait presser.
+   Transparent, il ne se voit plus — et ce que l'on voit à la place est
+   l'affiche, qui dérive. Une lecture refusée devient alors indiscernable
+   d'une lecture qui part.
+
+   Elle ne reçoit pas non plus les clics : c'est la page entière qui écoute
+   (voir js/site.js), et un clic n'importe où relance la lecture. Mieux vaut
+   cela qu'une cible invisible au milieu de l'écran. */
+.hz-affiche { display: contents; }
+.hz-affiche img {
   animation: hzFade 1.6s ease both,
              hzBurns 30s var(--hz-ease, ease-in-out) infinite alternate;
 }
-.hz-video.hz-joue { animation: hzFade 1.6s ease both; }
-@media (prefers-reduced-motion: reduce) { .hz-video { animation: none; } }
+.hz-video {
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+  transition: opacity 900ms ease;
+}
+.hz-video.hz-joue { opacity: 1; }
+/* La dérive de l'affiche s'arrête quand la vidéo la recouvre : c'est alors
+   elle qui porte le mouvement. Si :has() venait à manquer, l'affiche
+   continuerait de dériver sous une vidéo opaque — invisible, sans dommage. */
+:has(> .hz-video.hz-joue) .hz-affiche img { animation: hzFade 1.6s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .hz-affiche img { animation: none; }
+  .hz-video { transition: none; }
+}
 
 /* La carte de réservation du héros, sur téléphone.
    Elle occupait 321 px — 38 % d'un écran de 844 — et masquait la vidéo
