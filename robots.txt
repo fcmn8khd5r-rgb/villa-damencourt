@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Matière de fabrication : l'ancien prototype à runtime et les captures qui ont
+# servi à le figer. Rien n'y renvoie, mais ces adresses restent atteignables —
+# on évite au moins qu'un moteur les indexe et les présente à la place du site.
+Disallow: /src/
