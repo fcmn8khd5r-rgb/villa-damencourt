@@ -9,10 +9,12 @@
 # ce qui pourrait subsister là-bas.
 
 [build]
-  # Site statique : il n'y a rien à construire. La commande est déclarée
-  # explicitement — sans cela, une commande restée dans l'interface
-  # continuerait de s'exécuter.
-  command = "echo 'site statique : rien a construire'"
+  # Rien à compiler, mais l'adresse réelle du site doit être inscrite dans les
+  # pages — canoniques, hreflang, balises de partage — et Netlify ne la connaît
+  # qu'au moment de construire. Voir outils-domaine.sh. La commande est
+  # déclarée ici : sans cela, une commande restée dans l'interface
+  # continuerait de s'exécuter à sa place.
+  command = "bash outils-domaine.sh"
   publish = "."
 
 [build.processing]
