@@ -291,3 +291,52 @@ button { min-height: 44px; }
 .hz-tiroir a:not(.hz-tiroir__2) + .hz-tiroir__2 {
   margin-top: 1.1rem; border-top: 1px solid #D8CEC0;
 }
+
+/* La vidéo d'accueil : fondu d'entrée ET dérive de repli.
+   La dérive est ce qui rend une lecture refusée indiscernable d'une lecture
+   qui part : l'affiche bouge, personne ne cherche un bouton. Elle s'arrête
+   dès que la vidéo joue vraiment — c'est alors elle qui porte le mouvement. */
+.hz-video {
+  animation: hzFade 1.6s ease both,
+             hzBurns 30s var(--hz-ease, ease-in-out) infinite alternate;
+}
+.hz-video.hz-joue { animation: hzFade 1.6s ease both; }
+@media (prefers-reduced-motion: reduce) { .hz-video { animation: none; } }
+
+/* La carte de réservation du héros, sur téléphone.
+   Elle occupait 321 px — 38 % d'un écran de 844 — et masquait la vidéo
+   qu'elle surplombe : ses quatre blocs, dessinés pour tenir sur une ligne à
+   940 px, s'empilaient chacun sur la sienne. « Hôtes » n'en prenait d'ailleurs
+   que 153 sur 350, sa bordure droite flottant au milieu du vide.
+   Les trois champs reviennent sur une seule ligne et les hauteurs se
+   resserrent ; le bouton garde toute la largeur, car c'est l'action. */
+@media (max-width: 700px) {
+  [style*="max-width: 940px"] > [style*="flex: 1 1 190px"],
+  [style*="max-width: 940px"] > [style*="flex: 0 1 116px"] {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: 13px 10px !important;
+  }
+  [style*="max-width: 940px"] > [style*="flex: 0 1 116px"] {
+    border-right: 0 !important;
+  }
+  /* Le bouton prend une rangée à lui seul. Sans cela sa base de 200 px
+     l'emportait sur les trois champs mis à « 1 1 0 », qui tombaient à 23 px
+     de large : les libellés débordaient de leur bloc. */
+  [style*="max-width: 940px"] > [style*="flex: 1 1 200px"] {
+    flex: 1 1 100% !important;
+    padding-block: 17px !important;
+  }
+}
+
+/* Le sur-titre du héros — « Le Moule · Grande-Terre, Guadeloupe ».
+   Il demande 350 px sur une ligne, ce qu'un écran de 390 px offre tout juste.
+   En dessous il se coupait au trait d'union de « Grande-Terre », ce qui se
+   lisait mal. L'interlettrage y perd un peu : c'est ce qui coûte le moins à
+   l'allure, la lettre restant plus lisible qu'un mot brisé en deux. */
+@media (max-width: 389px) {
+  [style*="letter-spacing: 0.36em"] {
+    letter-spacing: 0.15em !important;
+    font-size: 10px !important;
+  }
+}

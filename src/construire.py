@@ -384,13 +384,25 @@ def transformer(corps, lg, fichier):
         nom, affiche = VIDEOS.get(ident.group(1) if ident else "", VIDEOS["12021278"])
         # On conserve le style d'origine : c'est lui qui donne la forme du
         # cadre (plein écran sur l'accueil, bandeau 21/9 sur la région).
+        #
+        # Sauf l'animation. Le style capturé portait « animation: … hzFade »,
+        # et un style en ligne l'emporte sur la feuille : le Ken Burns de
+        # repli, prévu dans .hz-video pour que l'affiche dérive quand la
+        # lecture est refusée, ne s'appliquait donc jamais. Sur un appareil
+        # qui refuse la lecture automatique — économie d'énergie, réglage
+        # Safari « ne jamais lire » — on voyait une image parfaitement figée,
+        # d'où l'impression d'un site en panne qu'il faut démarrer à la main.
+        # L'animation est retirée d'ici pour que la feuille en dispose, et
+        # elle y compose le fondu d'entrée AVEC la dérive.
         style = re.search(r'style="([^"]*)"', t)
+        propre = re.sub(r'\s*animation\s*:[^;"]*;?', '',
+                        style.group(1) if style else '') or \
+                 "width:100%;height:100%;object-fit:cover"
         return ('<video class="hz-video" autoplay muted loop playsinline preload="metadata" '
                 'aria-hidden="true" poster="%s" style="%s">'
                 '<source src="/assets/video/%s-640.mp4" type="video/mp4" media="(max-width:700px)">'
                 '<source src="/assets/video/%s-960.mp4" type="video/mp4">'
-                '</video>' % (affiche, style.group(1) if style else
-                              "width:100%;height:100%;object-fit:cover", nom, nom))
+                '</video>' % (affiche, propre, nom, nom))
     corps = re.sub(r'<video\b[^>]*>.*?</video>', remplacer_video, corps, flags=re.S)
 
     # 5. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
@@ -435,7 +447,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "14"
+VERSION = "17"
 
 
 def main():
