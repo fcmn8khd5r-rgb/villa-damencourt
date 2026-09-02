@@ -199,6 +199,76 @@ def remplacer_image(m):
          f["l"], f["h"], f["attente"]))
 
 
+MENU_MOTS = {
+  "fr": {"ouvrir": "Ouvrir le menu", "fermer": "Fermer le menu"},
+  "en": {"ouvrir": "Open menu",      "fermer": "Close menu"},
+}
+
+
+def poser_menu(corps, lg):
+    """Ajoute un menu escamotable à la barre de navigation.
+
+    La barre d'origine était calculée en JavaScript : sous une certaine
+    largeur, React retirait la liste des sept liens et montrait un burger.
+    Ma capture ayant été prise à 1280 px, elle a figé la version bureau — et
+    sur un téléphone les sept liens, larges de 707 px en tout, se
+    chevauchaient dans une barre de 390. Les liens sont donc recopiés ici
+    dans un tiroir ; la feuille de style masque la liste sous 860 px et
+    montre le burger, sans rien changer au-dessus.
+
+    Le tiroir est écrit dans la page et ouvert par « :target » — donc en
+    CSS seul. Ni le burger ni la fermeture ne dépendent du JavaScript : si le
+    script ne s'exécute pas, le menu s'ouvre quand même. C'est la raison du
+    choix ; un burger piloté par script aurait supprimé toute navigation
+    mobile le jour où le script manque.
+    """
+    mots = MENU_MOTS[lg]
+    bloc = re.search(r'(<div data-dc-tpl="10"[^>]*>)(.*?)(</div>)', corps, re.S)
+    if not bloc:
+        print("  ATTENTION : liste de navigation non trouvée (%s)" % lg)
+        return corps
+
+    liens = re.findall(r'<a\b[^>]*?href="([^"]+)"[^>]*>(.*?)</a>', bloc.group(2), re.S)
+    if len(liens) < 5:
+        print("  ATTENTION : %d liens de navigation seulement (%s)" % (len(liens), lg))
+        return corps
+
+    burger = ('<a class="hz-burger" href="#hz-tiroir" role="button" '
+              'aria-label="%s"><i></i></a>' % mots["ouvrir"])
+    corps = corps[:bloc.end()] + burger + corps[bloc.end():]
+    corps = corps.replace('<nav data-dc-tpl="8"', '<nav id="hz-haut" data-dc-tpl="8"', 1)
+
+    tiroir = ['<div class="hz-tiroir" id="hz-tiroir">',
+              '<a class="hz-tiroir__x" href="#hz-haut" role="button" '
+              'aria-label="%s">&times;</a>' % mots["fermer"]]
+    for href, dedans in liens:
+        texte = re.sub(r"<[^>]+>", "", dedans).strip()
+        tiroir.append('<a href="%s">%s</a>' % (href, texte))
+
+    # Ouvert, le tiroir recouvre la barre : la bascule de langue et « Réserver »
+    # disparaîtraient le temps qu'il est ouvert. On les reprend en bas, séparés
+    # des pages par un filet. Ce sont les deux actions qu'un visiteur cherche
+    # justement quand il ouvre un menu.
+    barre = corps[corps.find("<nav"):corps.find("</nav>")]
+    autre = re.search(r'<a[^>]*?href="([^"]+)"[^>]*?hreflang="(\w+)"[^>]*>(.*?)</a>', barre, re.S)
+    if autre:
+        tiroir.append('<a class="hz-tiroir__2" href="%s" hreflang="%s" lang="%s">%s</a>'
+                      % (autre.group(1), autre.group(2), autre.group(2),
+                         re.sub(r"<[^>]+>", "", autre.group(3)).strip()))
+    resa = re.search(r'<a[^>]*?href="([^"]+)"[^>]*?data-dc-tpl="14"[^>]*>(.*?)</a>', barre, re.S)
+    if resa:
+        tiroir.append('<a class="hz-tiroir__2" href="%s">%s</a>'
+                      % (resa.group(1), re.sub(r"<[^>]+>", "", resa.group(2)).strip()))
+    tiroir.append('</div>')
+
+    fin = corps.find("</nav>")
+    if fin == -1:
+        print("  ATTENTION : fin de la barre de navigation non trouvée (%s)" % lg)
+        return corps
+    fin += len("</nav>")
+    return corps[:fin] + "".join(tiroir) + corps[fin:]
+
+
 def transformer(corps, lg, fichier):
     # 1. les images
     corps = re.sub(r'<image-slot\b(.*?)>\s*</image-slot>', remplacer_image, corps, flags=re.S)
@@ -325,6 +395,9 @@ def transformer(corps, lg, fichier):
 
     # 5. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
     corps = corps.replace("https://images.unsplash.com/", "/assets/img/")
+    # 6. le menu escamotable de la barre de navigation
+    corps = poser_menu(corps, lg)
+
     return corps
 
 
@@ -362,7 +435,7 @@ SITE = "https://villa-damencourt.example"
 # Le numéro de version force le navigateur à reprendre CSS et JavaScript.
 # À monter dès qu'on touche à l'un des deux : sans cela, un visiteur déjà
 # venu — et le développeur lui-même — continue de recevoir l'ancien fichier.
-VERSION = "9"
+VERSION = "14"
 
 
 def main():

@@ -129,3 +129,165 @@ button { min-height: 44px; }
   background: none; border: 0; color: #F7F2EA; font-size: 2rem; line-height: 1;
   cursor: pointer; padding: .4rem .7rem; min-width: 44px; min-height: 44px;
 }
+
+/* =========================================================================
+   Mise en page mobile
+   =========================================================================
+   Ce site calculait sa mise en page EN JAVASCRIPT : React lisait la largeur
+   de la fenêtre et posait des styles en ligne en conséquence. En figeant le
+   DOM rendu à 1280 px pour en faire des pages statiques, j'ai figé les
+   valeurs du bureau — et sur téléphone les grilles restaient à quatre ou six
+   colonnes, comprimées dans 350 px. La page ne débordait pas, ce qui explique
+   qu'un contrôle de débordement ne l'ait pas vu ; elle était simplement
+   illisible.
+
+   Les valeurs ci-dessous portent « !important » parce qu'un style en ligne
+   l'emporte sur une feuille : c'est le seul moyen de reprendre la main sur ce
+   que React avait inscrit dans l'attribut. Chaque sélecteur vise une grille
+   précise, relevée sur les seize pages — et non toutes les grilles : celle du
+   calendrier doit garder ses sept colonnes, et les petites grilles internes
+   (icône + texte) sont déjà justes.
+   ========================================================================= */
+@media (max-width: 860px) {
+
+  /* Les duos texte + image, et le pied de page en trois blocs : l'un sous
+     l'autre. Côte à côte, chaque colonne tombait sous 170 px. */
+  [style*="minmax(0px, 4fr) minmax(0px, 6fr)"],
+  [style*="minmax(0px, 5fr) minmax(0px, 7fr)"],
+  [style*="minmax(0px, 7fr) minmax(0px, 5fr)"],
+  [style*="minmax(0px, 5fr) minmax(0px, 3fr)"],
+  [style*="repeat(3, 1fr)"],
+  [style*="repeat(2, minmax(0px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Les vignettes et les chiffres-clés supportent deux colonnes : ce sont des
+     blocs courts, et une seule colonne étirerait la page inutilement. */
+  [style*="repeat(4, 1fr)"],
+  [style*="repeat(6, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Le tableau des tarifs : quatre colonnes deviennent deux, saison et
+     période sur la première ligne, prix et minimum sur la seconde. Cette
+     règle vient après la précédente, dont le sélecteur « 1fr 1fr » l'aurait
+     sinon emporté par simple ordre d'écriture. */
+  [style*="1.4fr 1.6fr 1fr 1fr"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px 24px !important;
+  }
+
+  /* Navigation. Les sept liens tenaient 707 px dans une barre de 390 : ils
+     se chevauchaient. Ils passent dans un tiroir, ouvert par un burger. */
+  nav > [data-dc-tpl="10"] { display: none !important; }
+  .hz-burger { display: inline-flex !important; }
+}
+
+/* ---- burger et tiroir ---------------------------------------------------- */
+.hz-burger {
+  display: none; width: 44px; height: 44px; flex: 0 0 auto;
+  align-items: center; justify-content: center;
+  background: none; border: 0; cursor: pointer; color: inherit; padding: 0;
+}
+.hz-burger i {
+  display: block; width: 22px; height: 1px; background: currentColor; position: relative;
+}
+.hz-burger i::before, .hz-burger i::after {
+  content: ""; position: absolute; left: 0; width: 22px; height: 1px; background: currentColor;
+}
+.hz-burger i::before { top: -7px; }
+.hz-burger i::after  { top: 7px; }
+
+.hz-tiroir {
+  position: fixed; inset: 0; z-index: 60; background: #F7F2EA; color: #2B241E;
+  display: flex; flex-direction: column; justify-content: center; gap: .4rem;
+  padding-inline: clamp(24px, 8vw, 80px);
+  opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s;
+}
+/* Ouvert par l'ancre, donc sans JavaScript. */
+.hz-tiroir:target { opacity: 1; visibility: visible; }
+.hz-tiroir a {
+  font-family: Marcellus, serif; font-size: clamp(26px, 7vw, 40px);
+  color: #2B241E; padding: .28rem 0; text-decoration: none;
+}
+.hz-tiroir__x {
+  position: absolute; top: 18px; right: 20px; background: none; border: 0;
+  font-size: 2rem; line-height: 1; color: #2B241E; cursor: pointer;
+  min-width: 44px; min-height: 44px;
+}
+@media (prefers-reduced-motion: reduce) { .hz-tiroir { transition: none; } }
+
+@media (max-width: 860px) {
+
+  /* La galerie. Ses vignettes portent un placement en dur — « span 2 »,
+     « span 3 », « span 4 » — calculé pour six colonnes. Ramener la grille à
+     deux colonnes ne suffisait donc pas : les enfants recréaient des colonnes
+     implicites, et l'on retombait à quatre pistes inégales de 47 px. On leur
+     rend leur placement automatique. */
+  [style*="repeat(6, 1fr)"] > [style*="grid-column"] {
+    grid-column: auto !important;
+  }
+
+  /* Les deux mois du calendrier, côte à côte, laissaient 140 px à chacun pour
+     sept colonnes : la grille débordait de son parent. L'un sous l'autre.
+     Le sélecteur nomme la propriété entière, sans quoi « 1fr 1fr » attraperait
+     aussi la ligne de tarifs « 1.4fr 1.6fr 1fr 1fr ». */
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="repeat(7, 1fr)"], [style*="repeat(7, 1fr)"] > * {
+    min-width: 0 !important;
+  }
+}
+
+/* Le titre de l'accueil. Son plancher — 50 px — avait été choisi pour un
+   écran large : « Villa Damencourt » y occupait 368 px, soit plus que la
+   largeur d'un iPhone SE. Le plancher descend et la part variable monte, de
+   sorte que le titre garde sa présence sans jamais être coupé. */
+@media (max-width: 430px) {
+  [style*="clamp(50px, 9vw, 130px)"] {
+    font-size: clamp(34px, 10.5vw, 130px) !important;
+  }
+}
+
+/* La barre de navigation sur téléphone.
+   Une fois les sept liens rangés dans le tiroir, il restait quatre éléments :
+   le nom, le burger, la langue et « Réserver ». À 375 px ils réclamaient
+   396 px, et le bouton se trouvait coupé au bord droit. On resserre les
+   marges, l'espacement et le nom — sans jamais toucher au bouton d'action
+   lui-même, qui reste la cible la plus large de la barre. */
+@media (max-width: 430px) {
+  nav[data-dc-tpl="8"] {
+    padding-inline: 14px !important;
+    gap: 8px !important;
+  }
+  nav > a[data-dc-tpl="9"] {
+    font-size: 13px !important;
+    letter-spacing: 0.07em !important;
+  }
+  nav > a[data-dc-tpl="14"] {
+    font-size: 10px !important;
+    letter-spacing: 0.1em !important;
+    padding: 12px 13px !important;
+  }
+  .hz-burger { width: 38px; }
+}
+@media (max-width: 344px) {
+  /* iPhone SE et anciens Android : le nom passe en abrégé plutôt que d'être
+     tronqué. La page reste identifiée, le bouton reste entier. */
+  nav > a[data-dc-tpl="9"] { font-size: 11.5px !important; }
+  nav > a[data-dc-tpl="14"] { padding: 12px 10px !important; }
+}
+
+/* Les deux actions de bas de tiroir : plus discrètes que les pages, mais
+   pleinement lisibles — 4.5:1 sur le fond crème. */
+.hz-tiroir__2 {
+  font-family: Jost, sans-serif !important;
+  font-size: 13px !important;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #6B5F52 !important;
+  padding-top: 1rem !important;
+}
+.hz-tiroir a:not(.hz-tiroir__2) + .hz-tiroir__2 {
+  margin-top: 1.1rem; border-top: 1px solid #D8CEC0;
+}
