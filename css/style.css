@@ -92,8 +92,21 @@ button { min-height: 44px; }
 .hz-img img { position: absolute; inset: 0; width: 100%; height: 100%;
               object-fit: cover; display: block; }
 
-/* La vidéo de la région, désormais servie depuis ce serveur. */
-.hz-video { display: block; }
+/* La vidéo, désormais servie depuis ce serveur.
+
+   Elle DÉRIVE TANT QU'ELLE NE JOUE PAS. Sur un appareil qui refuse la lecture
+   automatique — économie d'énergie, mode données réduites, onglet ouvert en
+   arrière-plan — un <video> muet n'affiche que son affiche, immobile. Le
+   visiteur voit alors un écran mort là où on lui promettait du mouvement, et
+   il défile sans rien remarquer. Un lent Ken Burns tient le rôle en
+   attendant ; il s'arrête dès que la vidéo prend le relais, et ne se cumule
+   donc jamais avec elle. */
+.hz-video {
+  display: block;
+  animation: hzBurns 30s var(--hz-ease, ease-in-out) infinite alternate;
+}
+.hz-video.hz-joue { animation: none; }
+@media (prefers-reduced-motion: reduce) { .hz-video { animation: none; } }
 
 /* Personne n'ayant demandé d'animation ne doit en subir. */
 @media (prefers-reduced-motion: reduce) {

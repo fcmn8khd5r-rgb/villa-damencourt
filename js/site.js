@@ -349,4 +349,35 @@
     });
   }
 
+
+  /* ---- vidéos ------------------------------------------------------------
+     Elles portent autoplay, muted et playsinline : c'est la seule
+     configuration que les navigateurs mobiles acceptent sans geste. Cela ne
+     suffit pourtant pas toujours — l'économie d'énergie d'iOS et le mode
+     données réduites refusent la lecture quoi qu'on fasse. Deux garde-fous
+     donc : on retente à chaque occasion, et tant que rien ne joue, l'affiche
+     dérive (voir .hz-video dans le CSS) plutôt que de rester figée. */
+  var videos = $$(".hz-video");
+  if (videos.length) {
+    videos.forEach(function (v) {
+      v.addEventListener("playing", function () { v.classList.add("hz-joue"); });
+      v.addEventListener("pause", function () { v.classList.remove("hz-joue"); });
+      var tenter = function () {
+        if (!v.paused) return;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () { /* refusée : l'affiche dérive */ });
+      };
+      tenter();
+      ["loadedmetadata", "loadeddata", "canplay"].forEach(function (e) {
+        v.addEventListener(e, tenter);
+      });
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) tenter();
+      });
+      ["pointerdown", "keydown", "scroll"].forEach(function (e) {
+        window.addEventListener(e, tenter, { once: true, passive: true });
+      });
+    });
+  }
+
 })();
