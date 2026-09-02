@@ -152,7 +152,18 @@ def transformer(corps, lg, fichier):
             m.group("pre2"), m.group(3)),
         corps)
 
-    # 3. la vidéo : deux fichiers locaux au lieu d'un Full HD distant
+    # 3. la bascule de langue : un bouton piloté par React devient un lien.
+    #    Un lien s'ouvre dans un nouvel onglet, se partage, et fonctionne sans
+    #    JavaScript — ce qu'un bouton ne fait pas.
+    autre = "en" if lg == "fr" else "fr"
+    def langue(m):
+        return ('<a href="%s" hreflang="%s" lang="%s"%s>%s</a>'
+                % (lien(fichier, autre), autre, autre, m.group(1), m.group(2)))
+    corps = re.sub(
+        r'<button[^>]*aria-label="(?:Switch to English|Passer en français)"([^>]*)>(.*?)</button>',
+        langue, corps, flags=re.S)
+
+    # 4. la vidéo : deux fichiers locaux au lieu d'un Full HD distant
     corps = re.sub(
         r'<video\b[^>]*>.*?</video>',
         '<video class="hz-video" autoplay muted loop playsinline preload="metadata" '
@@ -162,7 +173,7 @@ def transformer(corps, lg, fichier):
         '<source src="/assets/video/plage-960.mp4" type="video/mp4">'
         '</video>', corps, flags=re.S)
 
-    # 4. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
+    # 5. le lien restant vers Unsplash ou Pexels n'a plus lieu d'être
     corps = corps.replace("https://images.unsplash.com/", "/assets/img/")
     return corps
 

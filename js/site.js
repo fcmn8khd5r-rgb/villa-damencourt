@@ -66,11 +66,33 @@
     });
   }
 
+  /* ---- bascule de langue ------------------------------------------------ */
+  /* Le bouton était piloté par React ; il devient un vrai lien vers la même
+     page dans l'autre langue. Un lien, et non un bouton : on peut l'ouvrir
+     dans un nouvel onglet, le partager, et il fonctionne sans JavaScript —
+     c'est d'ailleurs pour cela qu'on le remplace à la construction plutôt
+     qu'ici. Ce bloc ne sert que si la substitution n'a pas eu lieu. */
+  var bLangue = document.querySelector('button[aria-label="Switch to English"], ' +
+                                       'button[aria-label="Passer en français"]');
+  if (bLangue) {
+    bLangue.addEventListener("click", function () {
+      var c = location.pathname;
+      var vers = c.indexOf("/en/") === 0
+        ? c.replace("/en/", "/")
+        : "/en" + (c === "/" ? "/index.html" : c);
+      location.href = vers;
+    });
+  }
+
   /* ---- visionneuse de la galerie ---------------------------------------- */
   /* Elle s'ouvre sur les images de la galerie. Sans ce script, un clic ne
      fait rien de spécial — la page reste entière et parcourable. */
   var vues = $$(".hz-img img").filter(function (im) {
-    return im.closest("[data-galerie], .hz-gal, #hz-galerie") !== null;
+    // Le balisage d'origine marque les vues agrandissables par un parent en
+    // « cursor: zoom-in ». C'est le seul repère disponible, et il est fiable.
+    var p = im.closest(".hz-img");
+    p = p && p.parentElement;
+    return p !== null && /zoom-in/.test(p.getAttribute("style") || "");
   });
   if (vues.length) {
     var boite = document.createElement("div");
