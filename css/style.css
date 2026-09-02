@@ -1,0 +1,118 @@
+/* =========================================================================
+   Villa Damencourt — feuille de style
+   =========================================================================
+   Reprise telle quelle de la version d'origine, à une inversion près, et à
+   quelques ajouts nécessaires au passage en pages statiques.
+
+   L'INVERSION. La règle d'apparition était écrite ainsi :
+
+       [data-anim="on"] [data-reveal] { opacity: 0 }
+
+   Autrement dit : tout ce qui doit apparaître au défilement est INVISIBLE
+   par défaut, et n'existe que si le JavaScript vient le révéler. Sur ce
+   site — qui téléchargeait React et Babel avant de pouvoir exécuter la
+   moindre ligne — cela voulait dire plusieurs secondes de page vide, et une
+   page définitivement vide si quoi que ce soit échouait en chemin. C'est ce
+   que l'on voyait en disant que « les textes ne s'affichent pas ».
+
+   Désormais le contenu est visible par défaut. C'est le JavaScript qui,
+   une fois en place et seulement alors, pose « hz-anime » sur <html> et
+   prend la main sur les apparitions. Sans lui, on lit la page ; avec lui,
+   elle s'anime. Jamais l'inverse.
+   ========================================================================= */
+
+body { margin: 0; background: #F7F2EA; text-wrap: pretty; -webkit-font-smoothing: antialiased; }
+a { color: #B3552F; text-decoration: none; }
+a:hover { color: #8B3F21; }
+::selection { background: #E5C9B4; }
+@keyframes hzRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes hzFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hzVeil { from { opacity: 1; } to { opacity: 0; } }
+@keyframes hzBurns { from { transform: scale(1); } to { transform: scale(1.09); } }
+@keyframes hzDrop { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
+@keyframes hzWipe { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+/* Ne masque QUE si le JavaScript a pris la main (voir js/site.js). */
+/* Masqué en attendant d'être révélé — MAIS avec un filet posé en CSS, et
+   non en JavaScript. L'animation « hzSecours » ne fait rien pendant deux
+   secondes et demie, puis remet l'opacité à 1 quoi qu'il arrive. Un
+   observateur qui ne se déclenche pas, un minuteur ralenti par le
+   navigateur, un script qui échoue : aucun de ces cas ne peut plus laisser
+   un bloc invisible. C'est le navigateur lui-même qui garantit le retour,
+   sans qu'une ligne de JavaScript ait à s'exécuter. */
+html.hz-anime [data-reveal]:not(.hz-in) {
+  opacity: 0;
+  animation: hzSecours 0s 2.5s forwards;
+}
+@keyframes hzSecours { to { opacity: 1; } }
+html.hz-anime [data-reveal].hz-in { animation: hzRise 1000ms both cubic-bezier(0.16, 0.84, 0.24, 1); }
+html.hz-anime [data-reveal="wipe"].hz-in { animation: hzWipe 1100ms both cubic-bezier(0.16, 0.84, 0.24, 1), hzFade 600ms both; }
+@keyframes hzPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Parcours clavier : aucun style de focus n'existait, la navigation au clavier
+   était donc invisible. Le contour reprend l'ocre de la marque. */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid #B3552F;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+
+/* Un lien d'évitement, visible seulement au clavier. */
+.hz-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: #2B241E; color: #FFF8EF; padding: 14px 22px;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.hz-skip:focus { left: 12px; top: 12px; color: #FFF8EF; }
+
+/* Transition douce d'une page à l'autre. */
+html.hz-anime .hz-page { animation: hzPage 520ms both cubic-bezier(0.16, 0.84, 0.24, 1); }
+
+/* Confort de lecture et cibles tactiles. */
+input, textarea, select, button { font-size: 16px; }   /* évite le zoom auto sur iOS */
+button { min-height: 44px; }
+@media (hover: hover) {
+  a, button { transition: color 300ms ease, background 300ms ease, border-color 300ms ease, transform 300ms ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.hz-anime [data-reveal] { opacity: 1; animation: none !important; }
+  html.hz-anime .hz-page { animation: none !important; }
+  * { animation-duration: 0.001ms !important; }
+}
+
+/* ---- ajouts du passage en statique -------------------------------------- */
+
+/* Remplace l'élément <image-slot> du runtime : même boîte, même cadrage.
+   Le rapport de forme vient du style en ligne, comme avant ; l'image le
+   remplit en « cover ». */
+.hz-img { position: relative; overflow: hidden; }
+.hz-img picture { display: contents; }
+.hz-img img { position: absolute; inset: 0; width: 100%; height: 100%;
+              object-fit: cover; display: block; }
+
+/* La vidéo de la région, désormais servie depuis ce serveur. */
+.hz-video { display: block; }
+
+/* Personne n'ayant demandé d'animation ne doit en subir. */
+@media (prefers-reduced-motion: reduce) {
+  html.hz-anime [data-reveal] { opacity: 1 !important; animation: none !important; }
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+/* ---- visionneuse --------------------------------------------------------- */
+.hz-visio {
+  position: fixed; inset: 0; z-index: 90; display: flex;
+  align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+  background: rgba(24, 20, 17, .94); padding: clamp(1rem, 4vw, 3rem);
+  opacity: 0; transition: opacity .3s ease;
+}
+.hz-visio[data-ouvert] { opacity: 1; }
+.hz-visio img { max-width: 100%; max-height: 82vh; object-fit: contain; }
+.hz-visio__leg { color: #F7F2EA; font-size: .86rem; letter-spacing: .04em; margin: 0; opacity: .82; }
+.hz-visio__x {
+  position: absolute; top: 1rem; right: 1.2rem; z-index: 2;
+  background: none; border: 0; color: #F7F2EA; font-size: 2rem; line-height: 1;
+  cursor: pointer; padding: .4rem .7rem; min-width: 44px; min-height: 44px;
+}

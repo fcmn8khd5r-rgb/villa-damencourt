@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Villa Damencourt">
+  <rect width="64" height="64" fill="#201B17"/>
+  <path d="M14 42 32 22l18 20" fill="none" stroke="#E5C9B4" stroke-width="3.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 48h44" fill="none" stroke="#B3552F" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

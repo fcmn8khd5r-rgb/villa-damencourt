@@ -1,3 +1,6 @@
 .DS_Store
 ._*
 *.log
+
+# Photos d'origine à 2400 px : sources de travail, les dérivées suffisent au site
+src/orig/

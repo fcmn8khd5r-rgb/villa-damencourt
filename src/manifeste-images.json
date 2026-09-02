@@ -1,0 +1,737 @@
+{
+ "hz-exp-1": {
+  "alt": "La plage de l'Autre Bord",
+  "attente": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAwAAwBSJZACdAEfjiBiwVcAAP7mBXEwQe+SxJnq0zeOHmeH1HOs8n46R/PTDrU4lriHusAAAA==",
+  "credit": "Pexels",
+  "forme": "4/3",
+  "h": 1350,
+  "l": 1800,
+  "profil": "",
+  "variantes": {
+   "1280": {
+    "avif": 79083,
+    "webp": 99216
+   },
+   "1800": {
+    "avif": 114069,
+    "webp": 154946
+   },
+   "480": {
+    "avif": 17767,
+    "webp": 21356
+   },
+   "800": {
+    "avif": 41894,
+    "webp": 50240
+   }
+  }
+ },
+ "hz-exp-2": {
+  "alt": "Le lagon",
+  "attente": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAwAAwBSJagC7AEVVusoU7AA/mbTol2wspdu/3jJARWv9/rVlmNECy/2Huu5OhcAAA==",
+  "credit": "erikmagkekse",
+  "forme": "4/3",
+  "h": 1800,
+  "l": 2400,
+  "profil": "erikmagkekse",
+  "variantes": {
+   "1280": {
+    "avif": 99862,
+    "webp": 128692
+   },
+   "1920": {
+    "avif": 225096,
+    "webp": 294650
+   },
+   "2400": {
+    "avif": 403111,
+    "webp": 491428
+   },
+   "480": {
+    "avif": 15994,
+    "webp": 17370
+   },
+   "800": {
+    "avif": 39791,
+    "webp": 48762
+   }
+  }
+ },
+ "hz-exp-3": {
+  "alt": "Le spot de surf",
+  "attente": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoQAAwAAwBSJbACdAEQAHRmAAD+kWFYF7+RA7ksCw71osgl01TrvdyVejDgPj5P024HO/PUfdVuia2ATwex2H7mfUClnhAA",
+  "credit": "joepregadio",
+  "forme": "4/3",
+  "h": 1607,
+  "l": 2143,
+  "profil": "joepregadio",
+  "variantes": {
+   "1280": {
+    "avif": 70941,
+    "webp": 100558
+   },
+   "1920": {
+    "avif": 122545,
+    "webp": 177428
+   },
+   "2143": {
+    "avif": 147950,
+    "webp": 212642
+   },
+   "480": {
+    "avif": 15512,
+    "webp": 17548
+   },
+   "800": {
+    "avif": 34826,
+    "webp": 44896
+   }
+  }
+ },
+ "hz-exp-4": {
+  "alt": "La Porte d'Enfer",
+  "attente": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAwAAwBSJZgCdAEef8mdQAD+2q+6S9APJqaOw3Nd/gsiUQUtWO30eFxSdcJJXdZxOm7/Pfwd7Fm3QSCCU0Fat/q2lxbApAA=",
+  "credit": "ewen_r_photographie",
+  "forme": "4/3",
+  "h": 1800,
+  "l": 2400,
+  "profil": "ewen_r_photographie",
+  "variantes": {
+   "1280": {
+    "avif": 201216,
+    "webp": 247656
+   },
+   "1920": {
+    "avif": 364980,
+    "webp": 474590
+   },
+   "2400": {
+    "avif": 481875,
+    "webp": 656510
+   },
+   "480": {
+    "avif": 32056,
+    "webp": 36032
+   },
+   "800": {
+    "avif": 84704,
+    "webp": 99914
+   }
+  }
+ },
+ "hz-exp-5": {
+  "alt": "Le tour de Grande-Terre",
+  "attente": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAwAAwBSJaACdAEfbmGaYmAAAP74wd4GDpcMYA4LbFlxZKDON/LC5puPLGs9jcD9JkokR08Tw+q68pgmD3k+njm6eC6IAAA=",
+  "credit": "davidvives",
+  "forme": "4/3",
+  "h": 1806,
+  "l": 2400,
+  "profil": "davidvives",
+  "variantes": {
+   "1280": {
+    "avif": 98649,
+    "webp": 128818
+   },
+   "1920": {
+    "avif": 179060,
+    "webp": 240564
+   },
+   "2400": {
+    "avif": 262270,
+    "webp": 345586
+   },
+   "480": {
+    "avif": 20407,
+    "webp": 22386
+   },
+   "800": {
+    "avif": 46877,
+    "webp": 57108
+   }
+  }
+ },
+ "hz-exp-6": {
+  "alt": "Les fins de journée",
+  "attente": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAwAAwBSJbACdAERGm01zdAA/ulYefE6flDJ1N2nhbnj/S+jewnpLaG6MXhgh7j47FHI6zqVWYNgPsCtYkVv06iWybx9Y+zrN2Fd32PnmQAA",
+  "credit": "soyprome",
+  "forme": "4/3",
+  "h": 1600,
+  "l": 2133,
+  "profil": "soyprome",
+  "variantes": {
+   "1280": {
+    "avif": 38365,
+    "webp": 54348
+   },
+   "1920": {
+    "avif": 70265,
+    "webp": 99712
+   },
+   "2133": {
+    "avif": 85268,
+    "webp": 120488
+   },
+   "480": {
+    "avif": 9110,
+    "webp": 11750
+   },
+   "800": {
+    "avif": 18884,
+    "webp": 25786
+   }
+  }
+ },
+ "hz-gal-1": {
+  "alt": "La piscine, fin d'après-midi",
+  "attente": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwAgCdASoQABAAAwBSJZAC7AEPDErrMwuTAAD++LfJXR8T1q+oYWjsSshkpTW7qcvFEUj5Jbbam6aCKb+8GsEzie0bMqc4cILW425692GZt0+K5sedlWv52Z8lutLmZ49fHBZkUaC+ORIWw/EWfAAA",
+  "credit": "John Fornander",
+  "forme": "1/1",
+  "h": 1601,
+  "l": 1601,
+  "profil": "johnfo",
+  "variantes": {
+   "1280": {
+    "avif": 67852,
+    "webp": 89970
+   },
+   "1601": {
+    "avif": 96814,
+    "webp": 127810
+   },
+   "480": {
+    "avif": 19254,
+    "webp": 20866
+   },
+   "800": {
+    "avif": 36593,
+    "webp": 44230
+   }
+  }
+ },
+ "hz-gal-2": {
+  "alt": "Le salon ouvert",
+  "attente": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQABAAAwBSJQBdgMXX3glI9wJwaAD+kEKZLS1aKthiUC+rWotL3Ep4MSUbveG9bKDu5LKxTaNyKiXy1Q/fqsz0U34lMfV7hef0PRpyJ9HXVmSUGRcJqIWRZC5gAA==",
+  "credit": "Aalo Lens",
+  "forme": "1/1",
+  "h": 1600,
+  "l": 1600,
+  "profil": "aalolens",
+  "variantes": {
+   "1280": {
+    "avif": 137884,
+    "webp": 167200
+   },
+   "1600": {
+    "avif": 205509,
+    "webp": 247768
+   },
+   "480": {
+    "avif": 28876,
+    "webp": 30568
+   },
+   "800": {
+    "avif": 66107,
+    "webp": 76272
+   }
+  }
+ },
+ "hz-gal-3": {
+  "alt": "La maison vue du ciel",
+  "attente": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAwAgCdASoQABAAAwBSJbACdAYwnwQs6co6EAD6nqKK485WcjnZNmFzsyQGzPBi1MttJ6H1esM+QrC8BNWUiTfzsSiIrATDKFfM/9JijIeyLwMQb7yTQZRGpPt3o15goe4U84Bm6saL6aqb4j+Rd0SOTM/AAA==",
+  "credit": "Antonio Araujo",
+  "forme": "1/1",
+  "h": 1599,
+  "l": 1599,
+  "profil": "antonioaraujo",
+  "variantes": {
+   "1280": {
+    "avif": 282333,
+    "webp": 340952
+   },
+   "1599": {
+    "avif": 411362,
+    "webp": 471214
+   },
+   "480": {
+    "avif": 61840,
+    "webp": 69174
+   },
+   "800": {
+    "avif": 143428,
+    "webp": 165082
+   }
+  }
+ },
+ "hz-gal-4": {
+  "alt": "La grande table",
+  "attente": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQABAAAwBSJaQAAfM2T0U7iAAAzj49xJppwipTFvtbuPUSHF3JfLMTHUkvbcDKDuHTydGpSRCVm5OsoNnO4yc4S3YvM0fgvEwGEk0V1ztgMQCIDN8Flz1+q+UGwkEAAAA=",
+  "credit": "Liona Toussaint",
+  "forme": "1/1",
+  "h": 1350,
+  "l": 1350,
+  "profil": "lionatoussaint",
+  "variantes": {
+   "1280": {
+    "avif": 52845,
+    "webp": 69398
+   },
+   "1350": {
+    "avif": 57322,
+    "webp": 76060
+   },
+   "480": {
+    "avif": 17322,
+    "webp": 17750
+   },
+   "800": {
+    "avif": 31176,
+    "webp": 37334
+   }
+  }
+ },
+ "hz-gal-5": {
+  "alt": "Le salon d'ombre",
+  "attente": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAwAgCdASoQABAAAwBSJYwCdAYuHwS9ViUN+ADh7pDMvP7j2i2tpVnZojTu+iAaeS6yFRSbBn2ZD24XbRxktwLyjT5TRoIx9V1QmuuigPG4r+u2YQ6IXjXFPTxoiU9yDdhiWL6Am7AvgED3bPgGoaPojgAAAA==",
+  "credit": "Sanju Pandita",
+  "forme": "1/1",
+  "h": 1600,
+  "l": 1600,
+  "profil": "sanjupandita",
+  "variantes": {
+   "1280": {
+    "avif": 173675,
+    "webp": 217084
+   },
+   "1600": {
+    "avif": 261790,
+    "webp": 319204
+   },
+   "480": {
+    "avif": 37036,
+    "webp": 42814
+   },
+   "800": {
+    "avif": 83483,
+    "webp": 101048
+   }
+  }
+ },
+ "hz-gal-6": {
+  "alt": "La façade au crépuscule",
+  "attente": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAQCdASoQABAAAwBSJaACdAB4Lw0AAPueYqoEdYdf6N+LeuJdCd93vYg+tq/NeAnhTebZXZ804ipjf1nKQoNCZuDXT2hMMVQDneEHmt0sgCHAAAA=",
+  "credit": "Daniel Barnes",
+  "forme": "1/1",
+  "h": 1349,
+  "l": 1349,
+  "profil": "danielbarnes",
+  "variantes": {
+   "1280": {
+    "avif": 183298,
+    "webp": 230182
+   },
+   "1349": {
+    "avif": 212833,
+    "webp": 265368
+   },
+   "480": {
+    "avif": 29547,
+    "webp": 34286
+   },
+   "800": {
+    "avif": 79456,
+    "webp": 96462
+   }
+  }
+ },
+ "hz-gal-7": {
+  "alt": "La cuisine d'été",
+  "attente": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoQABAAAwBSJQBdgB6XHj6nYYvgAP6WqOsFu8WalDYUpElw/lbLdJkzkIDkm4J/Sog6BZrRyAAjUwAA",
+  "credit": "Frames For Your Heart",
+  "forme": "1/1",
+  "h": 1610,
+  "l": 1610,
+  "profil": "framesforyourheart",
+  "variantes": {
+   "1280": {
+    "avif": 50267,
+    "webp": 67466
+   },
+   "1610": {
+    "avif": 69844,
+    "webp": 97694
+   },
+   "480": {
+    "avif": 14969,
+    "webp": 15280
+   },
+   "800": {
+    "avif": 27787,
+    "webp": 33848
+   }
+  }
+ },
+ "hz-gal-8": {
+  "alt": "Le jardin",
+  "attente": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAwAgCdASoQABAAAwBSJbACdAYvrjSxsPt2AAD8PEulEnuoCSyudmtFPBNSvBZlcLKKj5dbwxPw4MixEu2MawKHqzdAVtxsGr0DhpbzIDE5djG9QB5rZsn7Z2ApAhJEI8Y51Nu22Vev4yAA",
+  "credit": "Ferdinand Asakome",
+  "forme": "1/1",
+  "h": 1350,
+  "l": 1350,
+  "profil": "ferdinandasakome",
+  "variantes": {
+   "1280": {
+    "avif": 107880,
+    "webp": 136692
+   },
+   "1350": {
+    "avif": 123597,
+    "webp": 154292
+   },
+   "480": {
+    "avif": 25693,
+    "webp": 28056
+   },
+   "800": {
+    "avif": 55276,
+    "webp": 65936
+   }
+  }
+ },
+ "hz-gal-9": {
+  "alt": "Le salon du soir",
+  "attente": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAQAgCdASoQABAAAwBSJYgCdADRQebmsXQAAP6FVHzB5Mzpz6bV2wJO/fS8SdVQCKCyWJJY7KLmv+McHnkR2mOpqsmGZmKAwSF0+c3nNld4XxWfjZyvhb0PVlen/f+uUetUWweAbmwuAA==",
+  "credit": "Hugo Richard",
+  "forme": "1/1",
+  "h": 2400,
+  "l": 2400,
+  "profil": "hugorichard",
+  "variantes": {
+   "1280": {
+    "avif": 146250,
+    "webp": 190406
+   },
+   "1920": {
+    "avif": 314517,
+    "webp": 413976
+   },
+   "2400": {
+    "avif": 596151,
+    "webp": 721934
+   },
+   "480": {
+    "avif": 31681,
+    "webp": 35384
+   },
+   "800": {
+    "avif": 68103,
+    "webp": 83198
+   }
+  }
+ },
+ "hz-home-a": {
+  "alt": "La villa vue du jardin, façade sur l'Atlantique",
+  "attente": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABQAgCdASoQAAwAAwBSJYgC7AYuRvMNAjkO78AA/vlvADk5XIBCfW9/IDOURlOOBS+duyk5i53pHj0GUA3K/6xljyTO020Iod6Zdj7tiQiCpcUOa3Apf2AAAAA=",
+  "credit": "John Fornander",
+  "forme": "4/3",
+  "h": 1800,
+  "l": 2400,
+  "profil": "johnfo",
+  "variantes": {
+   "1280": {
+    "avif": 72392,
+    "webp": 92574
+   },
+   "1920": {
+    "avif": 119811,
+    "webp": 164010
+   },
+   "2400": {
+    "avif": 162047,
+    "webp": 229812
+   },
+   "480": {
+    "avif": 21438,
+    "webp": 22272
+   },
+   "800": {
+    "avif": 40549,
+    "webp": 48014
+   }
+  }
+ },
+ "hz-home-b": {
+  "alt": "La varangue et ses fauteuils de rotin, en fin de journée",
+  "attente": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAwCdASoQABUAPt1apkyopSOiMAgBEBuJYgCdAB7HFvBCx7r3NkQoAP7Rk0vqqAl+wE5i/t2RTwz8yUFDPpWFMSUSC9cW1eigI4LKpxIdN12KMtRVfSO3gYiHDrwraMAAAA==",
+  "credit": "Roberto Nickson",
+  "forme": "3/4",
+  "h": 3200,
+  "l": 2400,
+  "profil": "rpnickson",
+  "variantes": {
+   "1280": {
+    "avif": 46380,
+    "webp": 81332
+   },
+   "1920": {
+    "avif": 97695,
+    "webp": 217634
+   },
+   "2400": {
+    "avif": 195471,
+    "webp": 403404
+   },
+   "480": {
+    "avif": 13471,
+    "webp": 16968
+   },
+   "800": {
+    "avif": 24845,
+    "webp": 36576
+   }
+  }
+ },
+ "hz-post-1": {
+  "alt": "Deux ailes de kite et un rack sous le carbet",
+  "attente": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAQCdASoQAAsAAwBSJYwCdADwGZ5lgAD4oZVK4VFTDYjxmaUIap0xZgAAAA==",
+  "credit": "evgenit",
+  "forme": "3/2",
+  "h": 1602,
+  "l": 2400,
+  "profil": "evgenit",
+  "variantes": {
+   "1280": {
+    "avif": 48668,
+    "webp": 67266
+   },
+   "1920": {
+    "avif": 95375,
+    "webp": 136514
+   },
+   "2400": {
+    "avif": 143675,
+    "webp": 203540
+   },
+   "480": {
+    "avif": 9550,
+    "webp": 9488
+   },
+   "800": {
+    "avif": 21534,
+    "webp": 27262
+   }
+  }
+ },
+ "hz-post-2": {
+  "alt": "Les volets anti-cycloniques ont été refaits",
+  "attente": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAsAAwBSJbACdLoAAssFPik0CADOPm/6jtVZszamlIrIeaYkcksU+IDnGk2XoBwepCsLq6N7Ex8e/wC8eNAimYVKSI5gh3auTQGIlgV80ABAAAA=",
+  "credit": "zeltisevs",
+  "forme": "3/2",
+  "h": 1600,
+  "l": 2400,
+  "profil": "zeltisevs",
+  "variantes": {
+   "1280": {
+    "avif": 55225,
+    "webp": 92968
+   },
+   "1920": {
+    "avif": 110828,
+    "webp": 193418
+   },
+   "2400": {
+    "avif": 164569,
+    "webp": 284646
+   },
+   "480": {
+    "avif": 14382,
+    "webp": 17848
+   },
+   "800": {
+    "avif": 28033,
+    "webp": 41434
+   }
+  }
+ },
+ "hz-post-3": {
+  "alt": "La saison des mangues a commencé au fond du jardin",
+  "attente": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoQAAsAAwBSJZgCdAELz9N6KS8AAP7p+hJG+OCy2iqwBp92hSuZVAdaQDUIR5h2P9oka6UenURTeOriP+YTmUgGM74uVcUKtQYO+jh63lghLygcAAA=",
+  "credit": "abrahamnoah",
+  "forme": "3/2",
+  "h": 1602,
+  "l": 2400,
+  "profil": "abrahamnoah",
+  "variantes": {
+   "1280": {
+    "avif": 65306,
+    "webp": 92150
+   },
+   "1920": {
+    "avif": 97474,
+    "webp": 152228
+   },
+   "2400": {
+    "avif": 124253,
+    "webp": 206922
+   },
+   "480": {
+    "avif": 22861,
+    "webp": 26518
+   },
+   "800": {
+    "avif": 40585,
+    "webp": 51920
+   }
+  }
+ },
+ "hz-post-4": {
+  "alt": "Le jardin créole a repris derrière la citerne",
+  "attente": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADQAQCdASoQAAsAAwBSJbACdACZFahFgADhLU2T3P8Wtq+TDdXa7l1QL1/nQ4tvCrzb1jI0863aBMUpShjwHLu988cz7liMnj6fpBzQ9GpZ3GuH5dDtxeqjCqZxP5wAAAA=",
+  "credit": "davidlangfyi",
+  "forme": "3/2",
+  "h": 1600,
+  "l": 2400,
+  "profil": "davidlangfyi",
+  "variantes": {
+   "1280": {
+    "avif": 269595,
+    "webp": 302096
+   },
+   "1920": {
+    "avif": 484883,
+    "webp": 564230
+   },
+   "2400": {
+    "avif": 666094,
+    "webp": 789678
+   },
+   "480": {
+    "avif": 50996,
+    "webp": 54264
+   },
+   "800": {
+    "avif": 124914,
+    "webp": 134690
+   }
+  }
+ },
+ "hz-post-5": {
+  "alt": "Une visite de la distillerie, et une caisse rapportée",
+  "attente": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAsAAwBSJbACdEf/gY44IdqgAP7s18zp2PHN+IVRjwlZRh8odRVF4cmYqE3yh8NjbqZVEmOufrUHMGcC6h4zPnHEUz2RvBe+3uhU66xf9wAA",
+  "credit": "madeline_sd",
+  "forme": "3/2",
+  "h": 1600,
+  "l": 2400,
+  "profil": "madeline_sd",
+  "variantes": {
+   "1280": {
+    "avif": 40881,
+    "webp": 70532
+   },
+   "1920": {
+    "avif": 112976,
+    "webp": 197264
+   },
+   "2400": {
+    "avif": 271837,
+    "webp": 372998
+   },
+   "480": {
+    "avif": 14577,
+    "webp": 17108
+   },
+   "800": {
+    "avif": 24004,
+    "webp": 33736
+   }
+  }
+ },
+ "hz-post-6": {
+  "alt": "Le carnaval passe devant le chemin",
+  "attente": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwAgCdASoQAAsAAwBSJaACdAYvXMELzvW3wAD+sg+sl7y8/WYdumckEf+KRvu63jDUfgLEcC0VS2hz9jsZfm/GbcizAQ0nqCxF54Ft6T7zaRGX7rfXFBtBU5ukMd54YTnAykceSWhWwYAP4MOxAAAA",
+  "credit": "j_35mm",
+  "forme": "3/2",
+  "h": 1600,
+  "l": 2400,
+  "profil": "j_35mm",
+  "variantes": {
+   "1280": {
+    "avif": 118211,
+    "webp": 141830
+   },
+   "1920": {
+    "avif": 191743,
+    "webp": 246438
+   },
+   "2400": {
+    "avif": 264531,
+    "webp": 332824
+   },
+   "480": {
+    "avif": 31724,
+    "webp": 31828
+   },
+   "800": {
+    "avif": 64572,
+    "webp": 71128
+   }
+  }
+ },
+ "hz-room-1": {
+  "alt": "Autre Bord",
+  "attente": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQAAwAAwBSJYgCdADz4b7cAAD9/F4HKJM0JX0S+5gW/cbXRaaPHTcSOkplj4nH3bS/mFl/XEMde3CLX+EdbEu36LkggtNqhf0kbpI7oIuYRnjgAAA=",
+  "credit": "Modunite Ltd",
+  "forme": "4/3",
+  "h": 1350,
+  "l": 1800,
+  "profil": "modunite",
+  "variantes": {
+   "1280": {
+    "avif": 102127,
+    "webp": 130482
+   },
+   "1800": {
+    "avif": 166566,
+    "webp": 220850
+   },
+   "480": {
+    "avif": 23858,
+    "webp": 26490
+   },
+   "800": {
+    "avif": 51742,
+    "webp": 62696
+   }
+  }
+ },
+ "hz-villa-wide": {
+  "alt": "La case créole dans son jardin, vue panoramique",
+  "attente": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAAcAAwBSJZACdADDihxjAAD+uBMXGvWajp0pBfL/ST5YXyMDLeFjkKjJQhsz6WhdP4J5S6yNtE07LJ7CN3E5V8t6qhz28IOCzAAA",
+  "credit": "Florian Schmidinger",
+  "forme": "21/9",
+  "h": 1029,
+  "l": 2400,
+  "profil": "florianschmidinger",
+  "variantes": {
+   "1280": {
+    "avif": 96734,
+    "webp": 113372
+   },
+   "1920": {
+    "avif": 192362,
+    "webp": 236264
+   },
+   "2400": {
+    "avif": 295307,
+    "webp": 364466
+   },
+   "480": {
+    "avif": 19873,
+    "webp": 19160
+   },
+   "800": {
+    "avif": 43622,
+    "webp": 47692
+   }
+  }
+ }
+}
