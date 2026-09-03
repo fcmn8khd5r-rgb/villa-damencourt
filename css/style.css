@@ -121,6 +121,18 @@ button { min-height: 44px; }
   background: rgba(24, 20, 17, .94); padding: clamp(1rem, 4vw, 3rem);
   opacity: 0; transition: opacity .3s ease;
 }
+/* « hidden » DOIT l'emporter, et la déclaration ci-dessus l'en empêchait.
+
+   L'attribut hidden ne masque que par la règle « [hidden] { display: none } »
+   de la feuille du navigateur, dont la spécificité est la plus faible qui
+   soit. Le « display: flex » ci-dessus la battait : la visionneuse restait
+   donc posée sur toute la page — position fixe, inset 0, z-index 90 — avec
+   une opacité nulle qui la rendait invisible, mais « pointer-events: auto »
+   qui lui faisait avaler CHAQUE clic. Le site paraissait normal et plus rien
+   n'était cliquable.
+
+   Le script, lui, était juste : il n'ouvre et ne ferme que par hidden. */
+.hz-visio[hidden] { display: none; }
 .hz-visio[data-ouvert] { opacity: 1; }
 .hz-visio img { max-width: 100%; max-height: 82vh; object-fit: contain; }
 .hz-visio__leg { color: #F7F2EA; font-size: .86rem; letter-spacing: .04em; margin: 0; opacity: .82; }
