@@ -362,6 +362,15 @@
     videos.forEach(function (v) {
       v.addEventListener("playing", function () { v.classList.add("hz-joue"); });
       v.addEventListener("pause", function () { v.classList.remove("hz-joue"); });
+
+      /* RATTRAPAGE : la lecture peut avoir commencé AVANT ce script.
+         Les <source> étant déclarées dans la page et la vidéo souvent déjà en
+         cache, elle démarre parfois dès l'analyse du document — mesuré à
+         507 ms, quand site.js n'arrivait qu'à 668. L'événement « playing »
+         était alors passé sans personne pour l'entendre : la classe n'était
+         jamais posée, et la vidéo jouait derrière une opacité nulle. On ne
+         voyait que l'affiche, sur toute visite de retour. */
+      if (!v.paused && v.readyState >= 3) v.classList.add("hz-joue");
       var tenter = function () {
         if (!v.paused) return;
         var p = v.play();
